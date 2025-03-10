@@ -1,0 +1,332 @@
+Branch and Bound Tree
+====================================
+
+Overview
+--------
+The file ``packages/branching/bbt/include/bbt_controller.hpp`` defines the
+``BBTController`` class template, which manages the branch-and-bound tree for the optimization
+solver using a branching strategy. It integrates various components such as BKF controllers,
+candidate selectors, and testing functions to facilitate the branching selection process and
+maintain the tree structure.
+
+
+License
+^^^^^^^
+This software is licensed under **GPL-3.0**.
+
+File Contents
+^^^^^^^^^^^^^
+The header file ``bbt_controller.hpp`` includes:
+
+- **BBTController Class Template**
+
+  - *Public Methods*:
+
+    - **Constructor**:
+      Initializes the controller with instance dimensions, phases, BKF sizes, and various callback
+      functions used for node comparisons, value extraction, branching candidate extraction,
+      and testing functions.
+
+    - **solve**:
+      Initiates the branch-and-bound solving process starting from the root node, exploring nodes,
+      updating bounds, and applying branching decisions until termination criteria are met.
+
+    - **getNumNodesExplored**:
+      Retrieves the total number of nodes explored during the solving process.
+
+    - **getNumNodes**:
+      Returns the current number of nodes in the branch-and-bound tree.
+
+    - **getLowerBound**:
+      Retrieves the current lower bound on the objective function.
+
+  - *Private Methods and Members*:
+
+    - **addNode**:
+      Adds a node to the branch-and-bound tree.
+
+    - **updateBounds**:
+      Updates the lower bound based on the nodes present in the tree.
+
+    - **printTreeDetail**:
+      Prints detailed information about the current branch-and-bound tree, including tree size, lower
+      bound, and upper bound.
+
+    - Various data members to manage the tree structure, branching history, BKF controllers,
+      and shared data for branching operations.
+
+BBTController Class Template
+----------------------------
+The ``BBTController`` class template is designed to manage the branch-and-bound tree in a
+branch-and-bound algorithm. It coordinates several components:
+
+- **BKF Controllers** for managing BKF-specific tasks.
+- **Candidate Selector and Testing Functions** for branching candidate extraction and evaluation.
+- **Pricing and Cutting Operations** to further process nodes within the tree.
+
+Constructor
+^^^^^^^^^^^
+- **BBTController**
+
+  *Input Parameters*:
+
+  - **dim**: Instance dimension.
+  - **ub**: Reference to the upper bound value.
+  - **num_phase0, num_phase1, num_phase2, num_phase3**: Number of outputs/testings for each phase.
+  - **bkf_size**: A vector of pairs indicating sizes for each BKF controller.
+  - **nodeComparator**: Function to compare two nodes.
+  - **valueExtractor**: Function to extract a local lower bound from a node.
+  - **idxExtractor**: Function to extract an index from a node.
+  - **enuStateExtractor**: Function to extract an enumeration state flag from a node.
+  - **brcExtractor**: Function to extract branching candidate info (candidate, branching direction,
+    local tree size) from a node.
+  - **brcValueOutput**: Function to output a reference of the exact improvement of the LP value
+    from the node to its parent.
+  - **isTerminate**: Function to check if a node has been marked as terminated.
+  - **getBranchingCandidates**: Function to retrieve branching candidates from a node.
+  - **processLPTestingFunction, processHeurTestingFunction, processExactTestingFunction**:
+    Functions to process different types of testing.
+  - **pricing**: Function to perform pricing operations.
+  - **cutting**: Function to perform cutting operations.
+  - **imposeBranching**: Function to impose branching decisions on a node.
+  - **getBestCandidateBySelfDefined** (Optional): Custom function to choose the best branching candidate.
+  - **tryWriteNodeOut** (Optional): Function to output node details externally.
+  - **tryReadNodeIn** (Optional): Function to read node details from an external source.
+
+  **Meaning**: The constructor initializes all internal data structures, configures BKF controllers
+  based on the provided sizes, and sets up the callback functions necessary for managing the branch-and-bound
+  tree.
+
+Header Code
+-------------------
+Below is an excerpt from ``bbt_controller.hpp`` that illustrates the definition of the ``BBTController`` class template:
+
+.. code-block:: cpp
+   :caption: bbt_controller.hpp
+
+   /*
+    * Copyright (c) 2025 Zhengzhong (Ricky) You.
+    * All rights reserved.
+    * Software: RouteOpt
+    * License: GPL-3.0
+    *
+    * @file bbt_controller.hpp
+    * @brief Header file for the BBTController class template.
+    *
+    * This header defines the BBTController class template, which manages the branch-and-bound
+    * tree for the optimization solver using a branching strategy. It integrates various
+    * components such as BKF controllers, candidate selectors, and testing functions.
+    */
+
+   #ifndef ROUTE_OPT_BBT_CONTROLLER_HPP
+   #define ROUTE_OPT_BBT_CONTROLLER_HPP
+
+   #include <set>
+   #include "bkf_controller.hpp"
+   #include "candidate_selector_controller.hpp"
+
+   namespace RouteOpt::Branching::BBT {
+       template<typename Node, typename BrCType, typename Hasher>
+       class BBTController {
+       public:
+           BBTController(
+               int dim,
+               double &ub,
+               int num_phase0,
+               int num_phase1,
+               int num_phase2,
+               int num_phase3,
+               const std::vector<std::pair<int, int> > &bkf_size,
+               const std::function<bool(Node *, Node *)> &nodeComparator,
+               const std::function<double(Node *)> &valueExtractor,
+               const std::function<int(Node *)> &idxExtractor,
+               const std::function<bool(Node *)> &enuStateExtractor,
+               const std::function<std::tuple<BrCType, bool, int>(Node *)> &brcExtractor,
+               std::function<double&(Node *)> brcValueOutput,
+               const std::function<bool(Node *)> &isTerminate,
+               const std::function<std::unordered_map<BrCType, double, Hasher>(Node *)> &getBranchingCandidates,
+               const std::function<void(Node *, const BrCType &, double &, double &)> &processLPTestingFunction,
+               const std::function<void(Node *, const BrCType &, double &, double &)> &processHeurTestingFunction,
+               const std::function<void(Node *, const BrCType &, double &, double &)> &processExactTestingFunction,
+               const std::function<void(Node *)> &pricing,
+               const std::function<void(Node *)> &cutting,
+               const std::function<void(Node *, const BrCType &, std::vector<Node *> &)> &imposeBranching,
+               const std::function<BrCType(Node *, BranchingHistory<BrCType, Hasher> &,
+                                           BranchingDataShared<BrCType, Hasher> &,
+                                           CandidateSelector::BranchingTesting<Node, BrCType, Hasher> &)> &
+                       getBestCandidateBySelfDefined = nullptr,
+               const std::function<void(Node *,
+                                        const BranchingHistory<BrCType, Hasher> &,
+                                        const BKF::BKFDataShared &)> &tryWriteNodeOut = nullptr,
+               const std::function<void(Node *,
+                                        BranchingHistory<BrCType, Hasher> &,
+                                        BKF::BKFDataShared &)> &tryReadNodeIn = nullptr)
+               : branching_data_shared(dim),
+                 branching_tester(num_phase0, num_phase1, num_phase2, num_phase3,
+                                  processLPTestingFunction,
+                                  processHeurTestingFunction,
+                                  processExactTestingFunction),
+                 pricing(pricing),
+                 cutting(cutting),
+                 imposeBranching(imposeBranching),
+                 getBranchingCandidates(getBranchingCandidates),
+                 getBestCandidateBySelfDefined(getBestCandidateBySelfDefined),
+                 tryWriteNodeOut(tryWriteNodeOut),
+                 tryReadNodeIn(tryReadNodeIn),
+                 isTerminate(isTerminate),
+                 valueExtractor(valueExtractor),
+                 idxExtractor(idxExtractor),
+                 enuStateExtractor(enuStateExtractor),
+                 brcExtractor(brcExtractor),
+                 brcValueOutput(brcValueOutput),
+                 tree(nodeComparator),
+                 ub_ref(ub) {
+               bkf_controllers.resize(bkf_size.size());
+               for (int i = 0; i < bkf_size.size(); ++i) {
+                   bkf_controllers[i].setMN(bkf_size[i].first, bkf_size[i].second);
+               }
+           }
+
+           void solve(Node *root_node);
+
+           [[nodiscard]] int getNumNodesExplored() const {
+               return num_nodes_explored;
+           }
+
+           [[nodiscard]] int getNumNodes() const {
+               return static_cast<int>(tree.size());
+           }
+
+           [[nodiscard]] double getLowerBound() const {
+               return lb;
+           }
+
+           BBTController() = default;
+           ~BBTController() = default;
+
+       private:
+           int num_nodes_explored{};
+           BranchingDataShared<BrCType, Hasher> branching_data_shared;
+           BranchingHistory<BrCType, Hasher> branching_history{};
+           CandidateSelector::BranchingTesting<Node, BrCType, Hasher> branching_tester;
+           BKF::BKFDataShared bkf_data_shared{};
+           std::vector<BKF::BKFController> bkf_controllers{};
+           std::function<void(Node *)> pricing{};
+           std::function<void(Node *)> cutting{};
+           std::function<void(Node *, const BrCType &, std::vector<Node *> &)> imposeBranching{};
+           std::function<std::unordered_map<BrCType, double, Hasher>(Node *)> getBranchingCandidates{};
+           std::function<BrCType(Node *, BranchingHistory<BrCType, Hasher> &, BranchingDataShared<BrCType, Hasher> &,
+                                 CandidateSelector::BranchingTesting<Node, BrCType, Hasher> &)>
+           getBestCandidateBySelfDefined{};
+           std::function<void(Node *,
+                              const BranchingHistory<BrCType, Hasher> &,
+                              const BKF::BKFDataShared &)> tryWriteNodeOut{};
+           std::function<void(Node *,
+                              BranchingHistory<BrCType, Hasher> &,
+                              BKF::BKFDataShared &)> tryReadNodeIn{};
+           std::function<bool(Node *)> isTerminate;
+           std::function<double(Node *)> valueExtractor;
+           std::function<int(Node *)> idxExtractor;
+           std::function<bool(Node *)> enuStateExtractor;
+           std::function<std::tuple<BrCType, bool, int>(Node *)> brcExtractor;
+           std::function<double&(Node *)> brcValueOutput;
+           std::set<Node *, std::function<bool(Node *, Node *)> > tree;
+           double lb{};
+           std::reference_wrapper<double> ub_ref;
+
+           void addNode(Node *node) {
+               tree.insert(node);
+           }
+
+           void updateBounds() {
+               if (tree.empty()) {
+                   lb = ub_ref.get();
+               } else {
+                   double minVal = std::numeric_limits<double>::infinity();
+                   for (auto &nodePtr: tree) {
+                       double val = valueExtractor(nodePtr);
+                       if (val < minVal) {
+                           minVal = val;
+                       }
+                   }
+                   lb = minVal;
+               }
+           }
+
+           void printTreeDetail() {
+               std::cout << BIG_PHASE_SEPARATION;
+               std::cout << "tree size= " << tree.size() << " lb= " << lb << " ub= " << ub_ref.get()
+                         << std::endl;
+               std::cout << BIG_PHASE_SEPARATION;
+           }
+       };
+   } // namespace RouteOpt::Branching::BBT
+
+   #include "workflow.hpp"
+   #endif // ROUTE_OPT_BBT_CONTROLLER_HPP
+
+Usage Example
+-------------
+The following example demonstrates how to instantiate and use the ``BBTController`` class template
+to solve a branch-and-bound tree. (Assume that all required callback functions and type definitions have been provided.)
+
+.. code-block:: cpp
+
+    #include "bbt_controller.hpp"
+    #include <iostream>
+
+    int main() {
+        // Define necessary parameters (dim, ub, phases, bkf sizes, etc.)
+        int dim = 10;
+        double upperBound = 1000.0;
+        std::vector<std::pair<int, int>> bkfs = { {60, 100}, {3, 4} }; // LP testing bkf, and heuristic testing bkf (m & n).
+
+        // Define dummy callback functions for demonstration purposes.
+        auto nodeComparator = [](auto a, auto b) -> bool { return a->getValue() < b->getValue(); };
+        auto valueExtractor = [](auto node) -> double { return node->getValue(); };
+        auto idxExtractor = [](auto node) -> int { return node->getIndex(); };
+        auto enuStateExtractor = [](auto node) -> bool { return node->isEnumerated(); };
+        auto brcExtractor = [](auto node) -> std::tuple<std::pair<int,int>, bool, int> { return std::make_tuple(std::make_pair(1,2), true, 3); };
+        std::function<double&(decltype(nullptr))> brcValueOutput = nullptr;
+        auto isTerminate = [](auto node) -> bool { return false; };
+        auto getBranchingCandidates = [](auto node) -> std::unordered_map<int, double> { return {}; };
+        auto processLPTestingFunction = [](auto node, const int &brc, double &a, double &b) {};
+        auto processHeurTestingFunction = processLPTestingFunction;
+        auto processExactTestingFunction = processLPTestingFunction;
+        auto pricing = [](auto node) {};
+        auto cutting = [](auto node) {};
+        auto imposeBranching = [](auto node, const int &brc, std::vector<decltype(node)> &nodes) {};
+
+        // Instantiate the BBTController.
+        RouteOpt::Branching::BBT::BBTController<int, int, std::hash<int>> bbtController(
+            dim, upperBound, 100, 10, 1, 1, bkfs, nodeComparator, valueExtractor, idxExtractor,
+            enuStateExtractor, brcExtractor, brcValueOutput, isTerminate, getBranchingCandidates,
+            processLPTestingFunction, processHeurTestingFunction, processExactTestingFunction,
+            pricing, cutting, imposeBranching
+        );
+
+        // Assume a valid root node pointer is obtained.
+        int *rootNode = nullptr; // Replace with actual node pointer.
+        bbtController.solve(rootNode);
+
+        std::cout << "Nodes explored: " << bbtController.getNumNodesExplored() << std::endl;
+        std::cout << "Current tree size: " << bbtController.getNumNodes() << std::endl;
+        std::cout << "Current lower bound: " << bbtController.getLowerBound() << std::endl;
+
+        return 0;
+    }
+
+Conclusion
+----------
+The ``BBTController`` class template is a vital component of the RouteOpt branching framework.
+It efficiently manages the branch-and-bound tree by coordinating various sub-components and callback
+functions, ensuring that the branching process is both flexible and robust. This modular design
+facilitates advanced branching strategies and is integral to the overall performance of RouteOpt.
+
+Further Reading
+----------------
+For additional details on how to use the ``BBTController`` class template and its various components,
+please refer to the example provided in the source code at ``packages/application/cvrp/src/main.cpp``.
+This file offers a comprehensive illustration of how to pass the necessary parameters and callback functions to the
+``BBTController`` constructor, as well as how to utilize its methods for solving the branch-and-bound tree.
+

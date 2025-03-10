@@ -1,0 +1,164 @@
+RCCs: Separation
+===================================
+
+Overview
+--------
+The file ``packages/rounded_cap_cuts/separation/include/rcc_separation_controller.hpp`` defines the
+``RCCSeparationController`` class, which provides a static method for generating Rounded
+Capacity Cuts (RCCs) within the RouteOpt software package. This controller leverages the CVRPSEP
+package to generate RCCs based on problem dimensions, capacity, demand, and solution information.
+It supports for smartly choosing the best form of RCCs, and call the CVRPSEP package with ease.
+
+License
+^^^^^^^
+This software is licensed under **GPL-3.0**.
+
+File Contents
+^^^^^^^^^^^^^
+The RCC separation module is composed of the following key component:
+
+- **Separation Controller**
+
+  The file ``rcc_separation_controller.hpp`` defines the ``RCCSeparationController`` class, which
+  manages the RCC separation process. It provides a static method to collect new RCCs using:
+
+  - Instance dimension.
+  - Capacity.
+  - Customer demand vector.
+  - Flags for keeping cuts, forcing the first RCC form, and applying a strengthened RCC form.
+  - Solution vector from the LP relaxation.
+  - A vector of ``SequenceInfo`` objects representing solution routes or sequences.
+  - A vector of existing RCCs to avoid duplicates.
+  - An output vector to store the newly generated RCCs.
+
+RCCSeparationController Class
+-----------------------------
+The ``RCCSeparationController`` class is responsible for the separation of Rounded Capacity Cuts (RCCs).
+It integrates with the CVRPSEP package, enabling the generation of RCCs based on the provided problem and
+solution data.
+
+Static Method: generateRCCs
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+- **generateRCCs**
+
+  *Inputs*:
+
+  - **dim**: An integer representing the instance dimension (e.g., number of customers + 1 depot).
+  - **cap**: A double representing the capacity constraint used in cut generation.
+  - **demand**: A vector of doubles where each entry corresponds to the demand at a customer.
+  - **if_keep_rcc**: A boolean flag to set whether newly generated RCCs should be retained.
+  - **if_force_first_form**: A boolean flag specifying whether to force the use of the first RCC form.
+  - **if_strengthen_rcc**: A boolean flag indicating whether RCCs should be strengthened (i.e., using form 3).
+  - **sol_x**: A vector of doubles containing fractional solution values from the LP relaxation.
+  - **sols**: A vector of ``SequenceInfo`` objects representing solution routes or sequences.
+  - **existing_rccs**: A vector of existing RCCs used to check for duplicates.
+
+  *Output*:
+
+  - **new_rccs**: A vector of RCCs in which the newly generated RCCs will be stored.
+
+  **Meaning**: This static method collects new Rounded Capacity Cuts (RCCs) based on the provided problem
+  data and solution information. It leverages parameters such as capacity, demand, and LP solution values to
+  generate cuts that can strengthen the LP relaxation of the Capacitated Vehicle Routing Problem (CVRP).
+
+Header Code
+-----------
+Below is an excerpt from ``rcc_separation_controller.hpp`` illustrating the key definitions:
+
+.. code-block:: cpp
+   :caption: rcc_separation_controller.hpp
+
+   /*
+    * Copyright (c) 2025 Zhengzhong (Ricky) You.
+    * All rights reserved.
+    * Software: RouteOpt
+    * License: GPL-3.0
+    */
+
+   /*
+    * @file rcc_separation_controller.hpp
+    * @brief Controller for Rounded Cap Cuts (RCCs) separation in RouteOpt.
+    *
+    * This header defines the RCCSeparationController class, which provides a static
+    * method to generate RCCs based on instance dimensions, capacity, demand, and solution
+    * information. The controller supports various options including keeping existing cuts,
+    * enforcing the first form, and strengthening the generated cuts.
+    */
+
+   #ifndef ROUTE_OPT_RCC_SEPARATION_CONTROLLER_HPP
+   #define ROUTE_OPT_RCC_SEPARATION_CONTROLLER_HPP
+
+   namespace RouteOpt::RCCs::Separation {
+       class RCCSeparationController {
+       public:
+           static void generateRCCs(int dim,
+                                    double cap,
+                                    const std::vector<double> &demand,
+                                    bool if_keep_rcc,
+                                    bool if_force_first_form,
+                                    bool if_strengthen_rcc,
+                                    const std::vector<double> &sol_x,
+                                    const std::vector<SequenceInfo> &sols,
+                                    const std::vector<Rcc> &existing_rccs,
+                                    std::vector<Rcc> &new_rccs);
+
+           RCCSeparationController() = delete;
+
+           ~RCCSeparationController() = default;
+       };
+   } // namespace RouteOpt::RCCs::Separation
+
+   #endif // ROUTE_OPT_RCC_SEPARATION_CONTROLLER_HPP
+
+Usage Example
+-------------
+Below is an example demonstrating how to use the RCCSeparationController to generate new Rounded Capacity Cuts (RCCs).
+
+.. code-block:: cpp
+
+   #include <vector>
+   #include <iostream>
+   #include "rcc_separation_controller.hpp"
+   #include "route_opt_macro.hpp"  // header for SequenceInfo
+   #include "rcc_macro.hpp"
+
+   using namespace RouteOpt::RCCs::Separation;
+
+   int main() {
+       // Define problem parameters.
+       int dim = 10;                       // Problem dimension (e.g., number of customers)
+       double cap = 100.0;                 // Vehicle capacity
+       std::vector<double> demand = { /* demand values for each customer */ };
+       bool if_keep_rcc = true;            // Flag to keep newly generated RCCs
+       bool if_force_first_form = false;   // Do not force the first RCC form
+       bool if_strengthen_rcc = true;      // Apply strengthened RCC form (form 3)
+       std::vector<double> sol_x = { /* fractional LP solution values */ };
+
+       // Prepare solution sequences.
+       std::vector<SequenceInfo> sols = { /* SequenceInfo objects representing routes */ };
+
+       // Prepare existing RCCs (if any).
+       std::vector<Rcc> existing_rccs = { /* Previously generated RCCs */ };
+
+       // Output vector to hold newly generated RCCs.
+       std::vector<Rcc> new_rccs;
+
+       // Generate new RCCs using the static method.
+       RCCSeparationController::generateRCCs(dim, cap, demand,
+                                             if_keep_rcc,
+                                             if_force_first_form,
+                                             if_strengthen_rcc,
+                                             sol_x, sols,
+                                             existing_rccs, new_rccs);
+
+       // Output the number of new RCCs generated.
+       std::cout << "Number of new RCCs generated: " << new_rccs.size() << std::endl;
+
+       return 0;
+   }
+
+Conclusion
+----------
+The RCC separation module in RouteOpt provides an effective framework for collecting Rounded Capacity Cuts (RCCs) to strengthen the LP relaxation of capacitated vehicle routing problems.
+The ``RCCSeparationController`` class leverages the CVRPSEP package to collect RCCs based on problem and solution data,
+choosing the most appropriate form of RCCs and avoiding duplicates.

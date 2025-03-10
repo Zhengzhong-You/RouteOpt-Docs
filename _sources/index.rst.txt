@@ -1,0 +1,81 @@
+RouteOpt Documentation
+======================
+
+Welcome to the RouteOpt documentation!
+
+What is RouteOpt?
+------------------
+RouteOpt is a comprehensive framework for solving vehicle routing problems (VRPs) exactly. It is built on top of the Gurobi optimization solver and provides a wide range of functionalities for solving VRPs, including:
+
+- A package for separating rank-1 cuts and identifying optimal memory allocation (node-based or arc-based).
+- A module for providing better dual values to accelerate pricing, such as through dual smoothing and faster dual techniques.
+- A package that handles enumerated nodes, simplifying post-enumeration operations on matrices.
+- A "deluxing" package to aggressively reduce the number of enumerated columns.
+- A state-of-the-art branching selection module that operates independently of pricing.
+
+Development History
+--------------------
+RouteOpt was initiated by Zhengzhong You in 2021 during his PhD studies at UF ISE. The initial goal was to solve VRPs effectively, but at the time, no fully open-source software met this need. Thus, RouteOpt was born.
+
+Initially, RouteOpt was designed exclusively for solving CVRP. The first version had extensive code nesting, making it difficult for newcomers to use and maintain. Development was slow, and maintenance was solely handled by the creator. Recognizing these limitations, RouteOpt was restructured into multiple modular components, allowing for:
+
+- Easier onboarding for new users.
+- Faster development and extension.
+- Direct usage of individual modules without needing deep knowledge of implementation details.
+
+Building a VRP solver from scratch can be overwhelming for researchers and practitioners. RouteOpt aims to lower this barrier, making exact VRP solving more accessible and fostering a stronger research community around it.
+
+Inspirations Behind RouteOpt
+----------------------------
+The need for a software implementation of learning-based branching techniques (as explored in research on Learning to Branch) was a major motivator behind the development of RouteOpt.
+
+Commitment to Development and Maintenance
+-----------------------------------------
+Special acknowledgment goes to **VRPSolver** (https://vrpsolver.math.u-bordeaux.fr/) and its contributors. Their work has significantly benefited the entire community, providing valuable techniques that have been integrated into RouteOpt. VRPSolver also offers exceptional performance, serving as a benchmark throughout RouteOpt's development.
+
+While RouteOpt has achieved certain advantages over VRPSolver in solving CVRP and VRPTW, it still has areas for improvement, including:
+
+- Expanding support for more problem types.
+- Enhancing scalability and flexibility.
+- Reducing parameter sensitivity and improving stability.
+
+These challenges can be addressed through collaborative efforts from the community. RouteOpt aspires to become a top-tier solver, empowering researchers and practitioners alike.
+
+Above all, RouteOpt stands on the shoulders of giants. Acknowledging past contributions is key to building a stronger future for the VRP research community.
+
+.. toctree::
+   :maxdepth: 1
+   :hidden:
+
+   get_started/start_index
+
+.. toctree::
+   :maxdepth: 1
+   :hidden:
+
+   common/config
+
+.. toctree::
+   :maxdepth: 1
+   :hidden:
+
+   common/solver
+
+.. toctree::
+   :maxdepth: 1
+   :hidden:
+
+   rank1_cuts/r1c_index
+
+.. toctree::
+   :maxdepth: 1
+   :hidden:
+
+   rounded_cap_cuts/rcc_index
+
+
+.. toctree::
+   :maxdepth: 1
+   :hidden:
+
+   branching/branching_index
