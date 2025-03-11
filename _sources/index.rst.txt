@@ -1,9 +1,8 @@
-
 What is RouteOpt?
 =================
 .. figure:: _static/RouteOpt_logo_left_right_2.png
    :alt: RouteOpt logo
-   :figwidth: 60%
+   :figwidth: 100%
 
 
 RouteOpt is a comprehensive framework designed for solving vehicle routing problems (VRPs) exactly. Built upon leading commercial solvers such as **Gurobi**, **CPLEX**, and **MindOpt**, RouteOpt provides extensive functionalities including:
