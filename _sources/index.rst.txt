@@ -9,8 +9,8 @@ RouteOpt is a comprehensive framework designed for solving vehicle routing probl
 
 - **Rank-1 Cuts**: Tools for cut generation, separation, reduced-cost updates in labeling, coefficient calculations, and more.
 - **Rounded Capacity Cuts**: Similar functionalities specifically tailored for rounded capacity cuts.
-- **Branching Module**: A state-of-the-art branching selection mechanism.
-- **Deluxing Package**: Aggressively reduces enumerated columns, significantly enhancing solver performance.
+- **Branching**: A state-of-the-art branching candidate and node selection mechanism.
+- **Deluxing**: Aggressively reduces enumerated columns, significantly enhancing solver performance.
 
 
 Development History
