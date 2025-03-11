@@ -7,7 +7,7 @@ What is RouteOpt?
 
 RouteOpt is a comprehensive framework designed for solving vehicle routing problems (VRPs) exactly. Built upon leading commercial solvers such as **Gurobi**, **CPLEX**, and **MindOpt**, RouteOpt provides extensive functionalities including:
 
-- **Rank-1 Cuts**: Tools for Rank-1 cut separation, reduced-cost updates in labeling, coefficient calculations, and more.
+- **Rank-1 Cuts**: Tools for Rank-1 cuts separation, reduced-cost updates in labeling, coefficient calculations, and more.
 - **Rounded Capacity Cuts**: Similar functionalities specifically tailored for rounded capacity cuts.
 - **Branching**: A state-of-the-art branching candidate and node selection mechanism.
 - **Deluxing**: Aggressively reduces enumerated columns, significantly enhancing solver performance.
