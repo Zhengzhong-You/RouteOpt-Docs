@@ -16,9 +16,14 @@ RouteOpt is a comprehensive framework designed for solving vehicle routing probl
 Development History
 -------------------
 
-RouteOpt was initiated by Zhengzhong (Ricky) You in 2021 during his PhD studies at UF ISE, under the guidance of Dr. Yu Yang. Initially intended to facilitate research on learning-based branching techniques, RouteOpt filled a gap left by the absence of fully open-source software meeting these needs.
+RouteOpt was initiated by Zhengzhong (Ricky) You (see [Ricky's Homepage](https://sites.google.com/view/yzz-ryker/home?authuser=0)) in 2021 during his PhD studies at UF ISE, under the mentorship of Dr. Yu Yang (see [Dr. Yang's Page](https://sites.google.com/view/yu-yang)).
 
-The initial release of RouteOpt focused exclusively on solving the Capacitated Vehicle Routing Problem (CVRP). However, early versions faced challenges such as extensive code nesting, which hindered usability and slowed development. Recognizing these barriers, RouteOpt was restructured into modular components, providing significant improvements:
+Originally developed to support research on learning-based branching techniques,
+RouteOpt was created to address the absence of fully open-source software in this area.
+The initial release focused solely on solving the Capacitated Vehicle Routing Problem (CVRP).
+However, early versions encountered issues—particularly excessive code nesting—which hampered usability and
+slowed further development. Recognizing these limitations, the project was restructured into modular components,
+resulting in significant improvements.
 
 - **Easy Onboarding**: Streamlined structure for quicker adoption by new users.
 - **Rapid Development**: Modular design allows faster enhancements and extensions.
