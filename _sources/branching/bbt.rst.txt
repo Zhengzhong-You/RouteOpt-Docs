@@ -78,7 +78,7 @@ Constructor
   - **valueExtractor**: Function to extract a local lower bound from a node.
   - **idxExtractor**: Function to extract an index from a node.
   - **enuStateExtractor**: Function to extract an enumeration state flag from a node.
-  - **brcExtractor**: Function to extract branching candidate info (candidate, branching direction,
+  - **lastBrcExtractor**: Function to extract last branching constraint info (candidate, branching direction,
     local tree size) from a node.
   - **brcValueOutput**: Function to output a reference of the exact improvement of the LP value
     from the node to its parent.
@@ -141,7 +141,7 @@ Below is an excerpt from ``bbt_controller.hpp`` that illustrates the definition 
                const std::function<double(Node *)> &valueExtractor,
                const std::function<int(Node *)> &idxExtractor,
                const std::function<bool(Node *)> &enuStateExtractor,
-               const std::function<std::tuple<BrCType, bool, int>(Node *)> &brcExtractor,
+               const std::function<std::tuple<BrCType, bool, int>(Node *)> &lastBrcExtractor,
                std::function<double&(Node *)> brcValueOutput,
                const std::function<bool(Node *)> &isTerminate,
                const std::function<std::unordered_map<BrCType, double, Hasher>(Node *)> &getBranchingCandidates,
@@ -177,7 +177,7 @@ Below is an excerpt from ``bbt_controller.hpp`` that illustrates the definition 
                  valueExtractor(valueExtractor),
                  idxExtractor(idxExtractor),
                  enuStateExtractor(enuStateExtractor),
-                 brcExtractor(brcExtractor),
+                 lastBrcExtractor(lastBrcExtractor),
                  brcValueOutput(brcValueOutput),
                  tree(nodeComparator),
                  ub_ref(ub) {
@@ -228,7 +228,7 @@ Below is an excerpt from ``bbt_controller.hpp`` that illustrates the definition 
            std::function<double(Node *)> valueExtractor;
            std::function<int(Node *)> idxExtractor;
            std::function<bool(Node *)> enuStateExtractor;
-           std::function<std::tuple<BrCType, bool, int>(Node *)> brcExtractor;
+           std::function<std::tuple<BrCType, bool, int>(Node *)> lastBrcExtractor;
            std::function<double&(Node *)> brcValueOutput;
            std::set<Node *, std::function<bool(Node *, Node *)> > tree;
            double lb{};
@@ -286,7 +286,7 @@ to solve a branch-and-bound tree. (Assume that all required callback functions a
         auto valueExtractor = [](auto node) -> double { return node->getValue(); };
         auto idxExtractor = [](auto node) -> int { return node->getIndex(); };
         auto enuStateExtractor = [](auto node) -> bool { return node->isEnumerated(); };
-        auto brcExtractor = [](auto node) -> std::tuple<std::pair<int,int>, bool, int> { return std::make_tuple(std::make_pair(1,2), true, 3); };
+        auto lastBrcExtractor = [](auto node) -> std::tuple<std::pair<int,int>, bool, int> { return std::make_tuple(std::make_pair(1,2), true, 3); };
         std::function<double&(decltype(nullptr))> brcValueOutput = nullptr;
         auto isTerminate = [](auto node) -> bool { return false; };
         auto getBranchingCandidates = [](auto node) -> std::unordered_map<int, double> { return {}; };
@@ -300,7 +300,7 @@ to solve a branch-and-bound tree. (Assume that all required callback functions a
         // Instantiate the BBTController.
         RouteOpt::Branching::BBT::BBTController<int, int, std::hash<int>> bbtController(
             dim, upperBound, 100, 10, 1, 1, bkfs, nodeComparator, valueExtractor, idxExtractor,
-            enuStateExtractor, brcExtractor, brcValueOutput, isTerminate, getBranchingCandidates,
+            enuStateExtractor, lastBrcExtractor, brcValueOutput, isTerminate, getBranchingCandidates,
             processLPTestingFunction, processHeurTestingFunction, processExactTestingFunction,
             pricing, cutting, imposeBranching
         );

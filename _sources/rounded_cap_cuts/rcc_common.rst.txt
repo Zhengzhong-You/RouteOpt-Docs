@@ -21,7 +21,7 @@ The header file includes the following key sections:
 Enumeration: RCCForm
 --------------------
 The enumeration ``RCCForm`` represents the different formulations of RCCs.
-Refer to the :doc:`Introduction page <index>` for a detailed explanation of the RCC forms.
+Refer to the :doc:`Introduction page <rcc_index>` for a detailed explanation of the RCC forms.
 
 - ``RCC_FORM_1``: Standard RCC formulation based on internal customer grouping.
 - ``RCC_FORM_2``: Alternate RCC formulation that typically utilizes outside customer grouping.

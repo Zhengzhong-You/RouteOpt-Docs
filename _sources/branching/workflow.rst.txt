@@ -91,7 +91,7 @@ function within the ``BBTController`` class template:
            printTreeDetail();
 
            auto val = valueExtractor(node);
-           auto [edge, dir, tree_level] = brcExtractor(node);
+           auto [edge, dir, tree_level] = lastBrcExtractor(node);
 
            // Perform pricing on the node.
            auto eps = TimeSetter::measure([&]() {

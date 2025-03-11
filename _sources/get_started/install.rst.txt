@@ -1,184 +1,71 @@
-Installation Instructions
-=========================
+Install
+=======
 
-RouteOpt
---------
-.. note::
-   RouteOpt solves the capacitated vehicle routing problem (CVRP) and the vehicle routing problem with time windows (VRPTW).
-   Please cite our paper “`Two-Stage Learning to Branch in Branch-Price-and-Cut Algorithms for Solving Vehicle Routing Problems Exactly
-   <https://www.researchgate.net/publication/374553305_Two-Stage_Learning_to_Branch_in_Branch-Price-and-Cut_Algorithms_for_Solving_Vehicle_Routing_Problems_Exactly>`_”
-   if you use RouteOpt for your research.
+This guide is for building RouteOpt on Linux only.
 
-   RouteOpt is for *academic* use only.
+Prerequisites
+-------------
+Before proceeding, ensure you have the following installed:
 
-Overview
---------
-1. **Default Setting (Setting I)**: Full-fledged version with all functionalities enabled, offering the best overall performance.
-2. **Setting II**: For comparing different branching strategies.
-3. **Setting for open instances**: Requires access to supercomputing resources. Detailed explanations of these features can be found in our paper
-   “`Two-Stage Learning to Branch in Branch-Price-and-Cut Algorithms for Solving Vehicle Routing Problems Exactly
-   <https://www.researchgate.net/publication/374553305_Two-Stage_Learning_to_Branch_in_Branch-Price-and-Cut_Algorithms_for_Solving_Vehicle_Routing_Problems_Exactly>`_”
-   and the `User Manual <https://github.com/Zhengzhong-You/RouteOpt-usermanual>`_.
+- A C/C++ compiler.
+- **Ninja** build system. Install it using:
 
-.. note::
-   RouteOpt employs a novel two-stage learning-to-branch module. The current parameter configuration is suitable for most instances, except for
-   those where pricing is extremely challenging (e.g., CVRP instances with long routes). For such instances, please adjust the parameters as
-   recommended in the `User Manual <https://github.com/Zhengzhong-You/RouteOpt-usermanual>`_.
+  .. code-block:: bash
 
-.. note::
-   The VRPTW module is currently optimized for solving type-2 instances (with very loose capacity constraints) fast, and is not suitable for type-1
-   instances. This is due to the adaptive strategies mentioned in `Bucket Graph <https://pubsonline.informs.org/doi/abs/10.1287/trsc.2020.0985>`_.
+      sudo apt-get install ninja-build
 
-.. note::
-   The workflow design, computational techniques, and output style of RouteOpt pay tribute to `VRPSolver <https://vrpsolver.math.u-bordeaux.fr/>`_.
-   We are deeply grateful to Drs. Artur Pessoa, Ruslan Sadykov, Eduardo Uchoa, François Vanderbeck, and others who have contributed to VRPSolver.
-   Special thanks to Dr. Ruslan Sadykov for providing access to VRPSolver and assisting in tuning it. Without VRPSolver, RouteOpt would not be possible.
+  Ninja is used (for example, with Xgboost).
 
-Requirements
-============
-- `CMake <https://cmake.org/download/>`_ version 3.16 or higher (required).
-- `Eigen <https://eigen.tuxfamily.org/index.php?title=Main_Page>`_ version 3.4.0 or higher (required).
-- `XGBoost <https://xgboost.readthedocs.io/en/latest/build.html>`_ version 1.4.2 or higher (required).
-- `GUROBI <https://www.gurobi.com/downloads/gurobi-software/>`_ version 10.0 or higher (recommended).
-- `Boost <https://www.boost.org/users/download/>`_ version 1.76.0 or higher (recommended).
-- `CVRPSEP <https://github.com/Zhengzhong-You/cvrpsep>`_
-  (recommend this revised fork; the original is available at `CVRPSEP original <https://econ.au.dk/research/researcher-websites/jens-lysgaard/cvrpsep/>`_).
-- `HGS <https://github.com/Zhengzhong-You/hgs>`_
-  (recommend this revised fork; the original is available at `HGS original <https://github.com/vidalt/HGS-CVRP>`_).
-  *(Optional for obtaining good UBs for CVRP instances)*
+- **Gurobi**: Make sure Gurobi is installed and note its installation path. This path will be used in the following steps.
+  **Important**: Enter the full path to the Linux64 folder (e.g., ``/home/yzz/gurobi1000/linux64``), not just the parent directory.
 
-Link Dependencies
-=================
-**Step 1:** Clone the RouteOpt repository:
-
-.. code-block:: bash
-
-   git clone https://github.com/Zhengzhong-You/RouteOpt.git
-
-**Step 2:** Construct the project directory tree:
-
-.. code-block:: bash
-
-   cd RouteOpt && mkdir Zips Dependency && cd Dependency
-
-**Step 3:** Build the cvrpsep library:
-
-.. code-block:: bash
-
-   (obtain the code) && cd cvrpsep
-   make
-
-**Step 4:** Download Eigen:
-
-.. code-block:: bash
-
-   cd ../
-   wget https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.zip
-   unzip eigen-3.4.0.zip && mv eigen-3.4.0.zip ../Zips
-
-**Step 4.5.1:** Build the HGS library (optional):
-
-   Follow the instructions at `HGS <https://github.com/Zhengzhong-You/hgs>`_ and uncomment the corresponding lines in ``CMakeLists.txt`` to enable the HGS library.
-
-**Step 4.5.2:** Build the XGBoost library:
-
-   Follow the instructions at `XGBoost <https://xgboost.readthedocs.io/en/latest/build.html>`_.
-
-*Ensure that these libraries are built in the ``Dependency`` folder.*
-
-**Step 5:** Set the ``GUROBI_HOME`` environment variable.
-
-On Linux, edit ``~/.bashrc``; on macOS, edit ``~/.bash_profile``. Add the following line:
-
-.. code-block:: bash
-
-   export GUROBI_HOME=<gurobi_root>/<gurobi_version>/<OS>
-
-Example:
-
-.. code-block:: bash
-
-   export GUROBI_HOME=${HOME}/gurobi1000/linux64
-
-Then reload the file:
-
-.. code-block:: bash
-
-   source ~/.bashrc
-   # or
-   source ~/.bash_profile
-
-**Step 6:** Revise ``FindGUROBI.cmake``.
-
-Locate the file in ``<path to solver>/RouteOpt/Application/CVRP/CVRP/package`` and modify it as follows:
-
-.. code-block:: cmake
-
-   find_library(<package>_LIBRARY
-       NAMES <lib>
-       PATHS "$ENV{<package>_HOME}/lib"
-   )
-
-Replace ``<lib>`` with the correct library name. For example, if using gurobi1000, the library will be ``libgurobi100.so`` on Linux and ``libgurobi100.dylib`` on macOS.
-
-**Step 7:** Revise ``CMakeLists.txt``.
-
-Update the Boost library paths. For example:
-
-.. code-block:: cmake
-
-   set(Boost_ROOT "/home/yzz/boost_1_83_0")
-   set(Boost_LIBRARY_DIR "/home/yzz/boost_1_83_0/stage/lib")
-
-.. note::
-   Although the CVRP source code is currently built under ``/RouteOpt/Application/CVRP/CVRP`` for convenience, a more standardized build process is recommended:
-
-   1. Create a build directory:
-
-      .. code-block:: bash
-
-         mkdir build
-         cd build
-
-   2. Run CMake and Make:
-
-      .. code-block:: bash
-
-         cmake ..
-         make
-
-   This will place the executable in the ``build`` directory. Adjust relative paths for instances accordingly (including the ``idx`` folder and any ``.ins`` files). In a future release, a standardized approach will replace the current method. For now, building the code in the ``CVRP`` folder is recommended.
-
-Usage
-=====
-1. **Using the ``idx/<ins_file.ins>`` (Recommended)**
+Installation Steps
+------------------
+1. **Clone the Repository**
+   Open a terminal and run:
 
    .. code-block:: bash
 
-      ./CVRP -d idx/<ins_file.ins> -n -u
+      git clone https://github.com/Zhengzhong-You/RouteOpt.git
 
-   In this command:
-
-   - ``-d`` specifies the ``.ins`` file.
-   - ``-n`` indicates the instance name is on the n-th line of the file.
-   - ``-u`` (optional) provides an initial upper bound (UB) if available. For example:
+2. **Change Directory**
+   Navigate to the cloned repository:
 
    .. code-block:: bash
 
-      ./CVRP -d idx/<ins_file>.ins -n 0 -u 1000
+      cd RouteOpt
 
-   If the ``.ins`` file contains a UB, that value is used and the one provided with ``-u`` is ignored. For instance:
+3. **Specify Gurobi Path**
+   When prompted, enter the full path to your Gurobi installation, for example:
+
+      /home/yzz/gurobi1000/linux64
+
+4. **Build RouteOpt**
+   The build process may take about 3 minutes to complete. Once finished, you should see the message:
+
+   ``Build process completed successfully.``
+
+   This indicates that all packages have been built successfully.
+
+Building CVRP or TW Solver
+---------------------------
+If you want to use our CVRP or TW solver:
+
+1. Change directory to the application package:
 
    .. code-block:: bash
 
-      ./CVRP -d idx/cvrp_200_200_opt.ins -n 0
+      cd packages/application/cvrp
 
-2. **Specifying the Complete Path**
+2. Run the build script:
 
    .. code-block:: bash
 
-      ./CVRP ./../../../DataForCVRP/BML/200_200/CVRP_200_154.vrp -u 30972.0
+      sh build.sh
 
-Additional Information
-======================
-For details on adjusting log files/outputs, parameters, and branching strategies, please refer to the `User Manual <https://github.com/Zhengzhong-You/RouteOpt-usermanual>`_.
+3. The script will compile the CVRP or TW solver and run a small test instance (P-n20-k2.vrp). If the test succeeds, you are all set!
+
+Conclusion
+----------
+After following these steps, RouteOpt and all required packages should be built successfully.
+Enjoy optimizing your routing problems with RouteOpt!

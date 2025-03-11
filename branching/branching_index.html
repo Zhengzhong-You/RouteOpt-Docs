@@ -597,14 +597,14 @@ go back to the details of the following branching module.</p>
 </ul>
 </div>
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
-<p>The Branching module handles the branch-and-bound procedures within RouteOpt. It manages the exploration of nodes, candidate selection via LP testing, heuristic testing, exact testing by default, and the integration of BKF <span id="id1">[<a class="reference internal" href="#id5" title="Zhengzhong You, Yu Yang, Xinshang Wang, and Wotao Yin. Two-stage learning to branch in branch-price-and-cut algorithms for solving vehicle routing problems exactly. Available at SSRN 4630549, 2023.">You <em>et al.</em>, 2023</a>]</span> for achieving best trade off between testing time and candidate quality. The default branching strategy is 3PB, where:</p>
+<p>The Branching module handles the branch-and-bound procedures within RouteOpt. It manages the exploration of nodes, candidate selection via LP testing, heuristic testing, exact testing by default, and the integration of BKF <span id="id1">[<a class="reference internal" href="common.html#id3" title="Zhengzhong You, Yu Yang, Xinshang Wang, and Wotao Yin. Two-stage learning to branch in branch-price-and-cut algorithms for solving vehicle routing problems exactly. Available at SSRN 4630549, 2023.">You <em>et al.</em>, 2023</a>]</span> for achieving best trade off between testing time and candidate quality. The default branching strategy is 3PB, where:</p>
 <ul class="simple">
 <li><p><strong>Phase 0:</strong> Initial screening</p></li>
 <li><p><strong>Phase 1:</strong> LP testing</p></li>
 <li><p><strong>Phase 2:</strong> Heuristic testing</p></li>
 <li><p><strong>Phase 3:</strong> Exact testing</p></li>
 </ul>
-<p>For more details, please refer to <span id="id2">[<a class="reference internal" href="#id66" title="Artur Pessoa, Ruslan Sadykov, Eduardo Uchoa, and François Vanderbeck. A generic exact solver for vehicle routing and related problems. Mathematical Programming, 183:483–523, 2020.">Pessoa <em>et al.</em>, 2020</a>, <a class="reference internal" href="#id5" title="Zhengzhong You, Yu Yang, Xinshang Wang, and Wotao Yin. Two-stage learning to branch in branch-price-and-cut algorithms for solving vehicle routing problems exactly. Available at SSRN 4630549, 2023.">You <em>et al.</em>, 2023</a>]</span>.</p>
+<p>For more details, please refer to <span id="id2">[<a class="reference internal" href="common.html#id3" title="Zhengzhong You, Yu Yang, Xinshang Wang, and Wotao Yin. Two-stage learning to branch in branch-price-and-cut algorithms for solving vehicle routing problems exactly. Available at SSRN 4630549, 2023.">You <em>et al.</em>, 2023</a>, <a class="reference internal" href="../common/config.html#id65" title="Artur Pessoa, Ruslan Sadykov, Eduardo Uchoa, and François Vanderbeck. A generic exact solver for vehicle routing and related problems. Mathematical Programming, 183:483–523, 2020.">Pessoa <em>et al.</em>, 2020</a>]</span>.</p>
 <h2 id="example-cvrp-main-cpp-review">Example: CVRP Main.cpp Review<a class="headerlink" href="#example-cvrp-main-cpp-review" title="Link to this heading">¶</a></h2>
 <p>The main entry point of the CVRP application is located at: <code class="docutils literal notranslate"><span class="pre">packages/application/cvrp/src/main.cpp</span></code>.</p>
 <p>Below is the code for main.cpp:</p>
@@ -759,41 +759,43 @@ The parameters:</p>
 <li><p><cite>static_cast&lt;int&gt;(NUM_TESTING::PHASE3)</cite></p></li>
 </ul>
 </div></blockquote>
-<dl class="simple">
-<dt>represent the number of output candidates for each phase. In the default 3PB strategy:</dt><dd><ul class="simple">
+<p>represent the number of output candidates for each phase. In the default 3PB strategy:</p>
+<blockquote>
+<div><ul class="simple">
 <li><p><strong>Phase 0:</strong> Initial screening.</p></li>
 <li><p><strong>Phase 1:</strong> LP testing.</p></li>
 <li><p><strong>Phase 2:</strong> Heuristic testing.</p></li>
 <li><p><strong>Phase 3:</strong> Exact testing.</p></li>
 </ul>
-</dd>
-</dl>
+</div></blockquote>
 </li>
 </ul>
 </li>
 <li><p><strong>BKF Parameters:</strong></p>
-<p>If BKF (Branching Kernel Functions) are enabled (<cite>IF_BKF</cite> is true), a vector of pairs is passed:
-- Each pair represents BKF parameters: the first integer is the M value and the second is the N value.
-- An empty vector indicates that BKF is not used.</p>
+<p>If BKF (Branching Kernel Functions) are enabled (<cite>IF_BKF</cite> is true), a vector of pairs is passed:</p>
+<ul class="simple">
+<li><p>Each pair represents BKF parameters: the first integer is the M value and the second is the N value.</p></li>
+<li><p>An empty vector indicates that BKF is not used.</p></li>
+</ul>
 </li>
 <li><p><strong>Node Functions:</strong></p>
-<p>A set of static functions from <strong>BbNode</strong> are provided:
-- <strong>defineBetterNode:</strong> Sorts nodes based on a criterion (e.g., its local lower bound).
-- <strong>getNodeValue:</strong> Returns the node’s value (e.g., its local lower bound).
-- <strong>getNodeIdx:</strong> Returns a unique node identifier.
-- <strong>getNodeIfInEnumState:</strong> Checks if the node is in an enumeration state <span id="id3">[<a class="reference internal" href="#id72" title="Roberto Baldacci, Nicos Christofides, and Aristide Mingozzi. An exact algorithm for the vehicle routing problem based on the set partitioning formulation with additional cuts. Mathematical Programming, 115:351–385, 2008.">Baldacci <em>et al.</em>, 2008</a>]</span> (i.e., all necessary columns are enumerated).
-- <strong>getLastBrc:</strong> Retrieves the last branching candidate for improvement calculation.
-- <strong>refNodeBrIncreaseVal:</strong> References the node’s branching increase value.
-- <strong>getNodeIfTerminate:</strong> Determines if the node is terminated (infeasible or optimal).
-- <strong>obtainSolEdgeMap:</strong> Gets the solution candidate (edge in this case) map for fractional candidate generation.</p>
+<p>A set of static functions from <strong>BbNode</strong> are provided:</p>
+<ul class="simple">
+<li><p><strong>defineBetterNode:</strong> Sorts nodes based on a criterion (e.g., its local lower bound).</p></li>
+<li><p><strong>getNodeValue:</strong> Returns the node’s value (e.g., its local lower bound).</p></li>
+<li><p><strong>getNodeIdx:</strong> Returns a unique node identifier.</p></li>
+<li><p><strong>getNodeIfInEnumState:</strong> Checks if the node is in an enumeration state <span id="id3">[<a class="reference internal" href="#id72" title="Roberto Baldacci, Nicos Christofides, and Aristide Mingozzi. An exact algorithm for the vehicle routing problem based on the set partitioning formulation with additional cuts. Mathematical Programming, 115:351–385, 2008.">Baldacci <em>et al.</em>, 2008</a>]</span> (i.e., all necessary columns are enumerated).</p></li>
+<li><p><strong>getLastBrc:</strong> Retrieves the last branching candidate for improvement calculation.</p></li>
+<li><p><strong>refNodeBrIncreaseVal:</strong> References the node’s branching increase value.</p></li>
+<li><p><strong>getNodeIfTerminate:</strong> Determines if the node is terminated (infeasible or optimal).</p></li>
+<li><p><strong>obtainSolEdgeMap:</strong> Gets the solution candidate (edge in this case) map for fractional candidate generation.</p></li>
+</ul>
 </li>
 <li><p><strong>Testing Functions:</strong></p>
-<p>The controller is also provided with functions for processing testing:
-- <strong>LP Testing Function:</strong></p>
-<blockquote>
-<div><p>Invokes <cite>processLPTesting</cite> on the solver.</p>
-</div></blockquote>
+<p>The controller is also provided with functions for processing testing:</p>
 <ul class="simple">
+<li><p><strong>LP Testing Function:</strong>
+Invokes <cite>processLPTesting</cite> on the solver.</p></li>
 <li><p><strong>Heuristic Testing Function:</strong>
 Invokes <cite>processCGTesting&lt;false&gt;</cite> on the solver.</p></li>
 <li><p><strong>Exact Testing Function:</strong>
@@ -802,10 +804,12 @@ Invokes <cite>processCGTesting&lt;true&gt;</cite> on the solver.</p></li>
 <p>These functions take a node and candidate as inputs and output the improvement in objective value for the left and right LPs relative to the current node.</p>
 </li>
 <li><p><strong>Pricing, Cutting, and Branching:</strong></p>
-<p>Additional functions provided include:
-- <strong>Pricing Function:</strong> Called at the beginning of node processing.
-- <strong>Cutting Function:</strong> Applies cutting on a node.
-- <strong>Impose Branching Function:</strong> Generates child nodes by applying a branching decision.</p>
+<p>Additional functions provided include:</p>
+<ul class="simple">
+<li><p><strong>Pricing Function:</strong> Called at the beginning of node processing.</p></li>
+<li><p><strong>Cutting Function:</strong> Applies cutting on a node.</p></li>
+<li><p><strong>Impose Branching Function:</strong> Generates child nodes by applying a branching decision.</p></li>
+</ul>
 </li>
 <li><p><strong>Self-Defined Branching Selection and I/O Functions:</strong></p>
 <ul class="simple">

@@ -73,7 +73,7 @@ The structure ``R1c`` represents a Rank-1 cut and includes the following members
 
   - A vector of integers representing the set :math:`C`. **Note:** The sequence of these integers is significant.
 
-  - An integer representing the plan index. Refer to the :doc:`Introduction page <index>` for details on what a plan means.
+  - An integer representing the plan index. Refer to the :doc:`Introduction page <r1c_index>` for details on what a plan means.
 
 - **idx_r1c**
 

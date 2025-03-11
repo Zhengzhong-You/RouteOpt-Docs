@@ -170,18 +170,21 @@ Explanation
 
    - **Template Parameters:**
      The controller is instantiated with the following template parameters:
+
        - **BbNode:** Node type for branch-and-bound.
        - **std::pair<int, int>:** Branching candidate type.
        - **PairHasher:** Hash function for the candidate type.
 
    - **Phase Parameters:**
      The parameters:
+
        - `static_cast<int>(NUM_TESTING::PHASE0)`
        - `static_cast<int>(NUM_TESTING::PHASE1)`
        - `static_cast<int>(NUM_TESTING::PHASE2)`
        - `static_cast<int>(NUM_TESTING::PHASE3)`
 
      represent the number of output candidates for each phase. In the default 3PB strategy:
+
        - **Phase 0:** Initial screening.
        - **Phase 1:** LP testing.
        - **Phase 2:** Heuristic testing.
@@ -190,12 +193,14 @@ Explanation
 2. **BKF Parameters:**
 
    If BKF (Branching Kernel Functions) are enabled (`IF_BKF` is true), a vector of pairs is passed:
+
    - Each pair represents BKF parameters: the first integer is the M value and the second is the N value.
    - An empty vector indicates that BKF is not used.
 
 3. **Node Functions:**
 
    A set of static functions from **BbNode** are provided:
+
    - **defineBetterNode:** Sorts nodes based on a criterion (e.g., its local lower bound).
    - **getNodeValue:** Returns the node's value (e.g., its local lower bound).
    - **getNodeIdx:** Returns a unique node identifier.
@@ -208,6 +213,7 @@ Explanation
 4. **Testing Functions:**
 
    The controller is also provided with functions for processing testing:
+
    - **LP Testing Function:**
      Invokes `processLPTesting` on the solver.
    - **Heuristic Testing Function:**
@@ -220,6 +226,7 @@ Explanation
 5. **Pricing, Cutting, and Branching:**
 
    Additional functions provided include:
+
    - **Pricing Function:** Called at the beginning of node processing.
    - **Cutting Function:** Applies cutting on a node.
    - **Impose Branching Function:** Generates child nodes by applying a branching decision.
