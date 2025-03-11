@@ -16,7 +16,8 @@ RouteOpt is a comprehensive framework designed for solving vehicle routing probl
 Development History
 -------------------
 
-RouteOpt was initiated by Zhengzhong (Ricky) You (see [Ricky's Homepage](https://sites.google.com/view/yzz-ryker/home?authuser=0)) in 2021 during his PhD studies at UF ISE, under the mentorship of Dr. Yu Yang (see [Dr. Yang's Page](https://sites.google.com/view/yu-yang)).
+RouteOpt was initiated by `Zhengzhong (Ricky) You <https://sites.google.com/view/yzz-ryker/home?authuser=0>`_ in 2021 during his PhD studies at UF ISE, under the mentorship of `Dr. Yu Yang <https://sites.google.com/view/yu-yang>`_.
+
 
 Originally developed to support research on learning-based branching techniques,
 RouteOpt was created to address the absence of fully open-source software in this area.
