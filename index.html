@@ -34,6 +34,7 @@
     
         <link rel="stylesheet" type="text/css" href="_static/sphinx_immaterial_theme.02cb18745d09eea51.min.css?v=ff456132" />
         <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+        <link rel="stylesheet" type="text/css" href="_static/custom.css?v=ae161c19" />
     <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -63,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#what-is-routeopt" class="md-skip">
+        <a href="#development-history" class="md-skip">
           Skip to content
         </a>
       
@@ -95,7 +96,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              RouteOpt Documentation
+              What is RouteOpt?
             
           </span>
         </div>
@@ -340,13 +341,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#what-is-routeopt" class="md-nav__link">
-    <span title="/index.rst#what-is-routeopt (reference label)" class="md-ellipsis">What is Route<wbr>Opt?</span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#development-history" class="md-nav__link">
     <span title="/index.rst#development-history (reference label)" class="md-ellipsis">Development History</span>
   </a>
@@ -354,8 +348,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#inspirations-behind-routeopt" class="md-nav__link">
-    <span title="/index.rst#inspirations-behind-routeopt (reference label)" class="md-ellipsis">Inspirations Behind Route<wbr>Opt</span>
+  <a href="#motivation-and-inspiration" class="md-nav__link">
+    <span title="/index.rst#motivation-and-inspiration (reference label)" class="md-ellipsis">Motivation and Inspiration</span>
   </a>
   
 </li>
@@ -381,48 +375,38 @@
                   
 
 
-<h1 id="routeopt-documentation">RouteOpt Documentation<a class="headerlink" href="#routeopt-documentation" title="Link to this heading">¶</a></h1>
-<p>Welcome to the RouteOpt documentation!</p>
-<h2 id="what-is-routeopt">What is RouteOpt?<a class="headerlink" href="#what-is-routeopt" title="Link to this heading">¶</a></h2>
-<p>RouteOpt is a comprehensive framework for solving vehicle routing problems (VRPs) exactly. It is built on top of the Gurobi optimization solver and provides a wide range of functionalities for solving VRPs, including:</p>
+<h1 id="what-is-routeopt">What is RouteOpt?<a class="headerlink" href="#what-is-routeopt" title="Link to this heading">¶</a></h1>
+<figure class="align-default" style="width: 60%">
+<img alt="RouteOpt logo" src="_images/RouteOpt_logo_left_right_2.png" />
+</figure>
+<p>RouteOpt is a comprehensive framework designed for solving vehicle routing problems (VRPs) exactly. Built upon leading commercial solvers such as <strong>Gurobi</strong>, <strong>CPLEX</strong>, and <strong>MindOpt</strong>, RouteOpt provides extensive functionalities including:</p>
 <ul class="simple">
-<li><p>A package for separating rank-1 cuts and identifying optimal memory allocation (node-based or arc-based).</p></li>
-<li><p>A module for providing better dual values to accelerate pricing, such as through dual smoothing and faster dual techniques.</p></li>
-<li><p>A package that handles enumerated nodes, simplifying post-enumeration operations on matrices.</p></li>
-<li><p>A “deluxing” package to aggressively reduce the number of enumerated columns.</p></li>
-<li><p>A state-of-the-art branching selection module that operates independently of pricing.</p></li>
+<li><p><strong>Rank-1 Cuts</strong>: Tools for cut generation, separation, reduced-cost updates in labeling, coefficient calculations, and more.</p></li>
+<li><p><strong>Rounded Capacity Cuts</strong>: Similar functionalities specifically tailored for rounded capacity cuts.</p></li>
+<li><p><strong>Branching Module</strong>: A state-of-the-art branching selection mechanism.</p></li>
+<li><p><strong>Deluxing Package</strong>: Aggressively reduces enumerated columns, significantly enhancing solver performance.</p></li>
 </ul>
 <h2 id="development-history">Development History<a class="headerlink" href="#development-history" title="Link to this heading">¶</a></h2>
-<p>RouteOpt was initiated by Zhengzhong You in 2021 during his PhD studies at UF ISE. The initial goal was to solve VRPs effectively, but at the time, no fully open-source software met this need. Thus, RouteOpt was born.</p>
-<p>Initially, RouteOpt was designed exclusively for solving CVRP. The first version had extensive code nesting, making it difficult for newcomers to use and maintain. Development was slow, and maintenance was solely handled by the creator. Recognizing these limitations, RouteOpt was restructured into multiple modular components, allowing for:</p>
+<p>RouteOpt was initiated by Zhengzhong (Ricky) You in 2021 during his PhD studies at UF ISE, under the guidance of Dr. Yu Yang. Initially intended to facilitate research on learning-based branching techniques, RouteOpt filled a gap left by the absence of fully open-source software meeting these needs.</p>
+<p>The initial release of RouteOpt focused exclusively on solving the Capacitated Vehicle Routing Problem (CVRP). However, early versions faced challenges such as extensive code nesting, which hindered usability and slowed development. Recognizing these barriers, RouteOpt was restructured into modular components, providing significant improvements:</p>
 <ul class="simple">
-<li><p>Easier onboarding for new users.</p></li>
-<li><p>Faster development and extension.</p></li>
-<li><p>Direct usage of individual modules without needing deep knowledge of implementation details.</p></li>
+<li><p><strong>Easy Onboarding</strong>: Streamlined structure for quicker adoption by new users.</p></li>
+<li><p><strong>Rapid Development</strong>: Modular design allows faster enhancements and extensions.</p></li>
+<li><p><strong>Flexible Usage</strong>: Independent use of modules without deep familiarity with implementation details.</p></li>
 </ul>
-<p>Building a VRP solver from scratch can be overwhelming for researchers and practitioners. RouteOpt aims to lower this barrier, making exact VRP solving more accessible and fostering a stronger research community around it.</p>
-<h2 id="inspirations-behind-routeopt">Inspirations Behind RouteOpt<a class="headerlink" href="#inspirations-behind-routeopt" title="Link to this heading">¶</a></h2>
-<p>The need for a software implementation of learning-based branching techniques (as explored in research on Learning to Branch) was a major motivator behind the development of RouteOpt.</p>
+<p>RouteOpt lowers the complexity of creating exact VRP solvers, fostering a more accessible environment for research and application.</p>
+<h2 id="motivation-and-inspiration">Motivation and Inspiration<a class="headerlink" href="#motivation-and-inspiration" title="Link to this heading">¶</a></h2>
+<p>RouteOpt was primarily inspired by the necessity for accessible software to implement “Learning to Branch” methodologies. By addressing this need, RouteOpt not only provides a practical solution but also encourages the adoption and further development of these advanced branching techniques within the research community.</p>
 <h2 id="commitment-to-development-and-maintenance">Commitment to Development and Maintenance<a class="headerlink" href="#commitment-to-development-and-maintenance" title="Link to this heading">¶</a></h2>
-<p>Special acknowledgment goes to <strong>VRPSolver</strong> (<a class="reference external" href="https://vrpsolver.math.u-bordeaux.fr/">https://vrpsolver.math.u-bordeaux.fr/</a>) and its contributors. Their work has significantly benefited the entire community, providing valuable techniques that have been integrated into RouteOpt. VRPSolver also offers exceptional performance, serving as a benchmark throughout RouteOpt’s development.</p>
-<p>While RouteOpt has achieved certain advantages over VRPSolver in solving CVRP and VRPTW, it still has areas for improvement, including:</p>
+<p>Special acknowledgment goes to the creators and contributors of <strong>VRPSolver</strong> (<a class="reference external" href="https://vrpsolver.math.u-bordeaux.fr/">vrpsolver.math.u-bordeaux.fr</a>), whose pioneering contributions have significantly influenced RouteOpt’s design and performance standards.</p>
+<p>While RouteOpt exhibits advantages over VRPSolver, particularly for CVRP and VRPTW problems, there remain numerous opportunities for improvement:</p>
 <ul class="simple">
-<li><p>Expanding support for more problem types.</p></li>
-<li><p>Enhancing scalability and flexibility.</p></li>
-<li><p>Reducing parameter sensitivity and improving stability.</p></li>
+<li><p>Extending solver support to additional VRP variants.</p></li>
+<li><p>Enhancing scalability, adaptability, and flexibility.</p></li>
+<li><p>Reducing parameter sensitivity and increasing overall stability.</p></li>
 </ul>
-<p>These challenges can be addressed through collaborative efforts from the community. RouteOpt aspires to become a top-tier solver, empowering researchers and practitioners alike.</p>
-<p>Above all, RouteOpt stands on the shoulders of giants. Acknowledging past contributions is key to building a stronger future for the VRP research community.</p>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
+<p>These challenges represent exciting opportunities for community collaboration, ensuring RouteOpt’s continual growth into a top-tier VRP solver.</p>
+<p>RouteOpt is committed to building on previous foundational work, driving advancements in vehicle routing research, and empowering both researchers and practitioners.</p>
 <div class="toctree-wrapper compound">
 </div>
 
