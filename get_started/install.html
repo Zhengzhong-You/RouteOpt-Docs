@@ -314,6 +314,26 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#build-your-own-solver" class="md-nav__link">
+    <span title="/get_started/install.rst#build-your-own-solver (reference label)" class="md-ellipsis">Build Your Own Solver</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Build Your Own Solver">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cmake-configuration-example" class="md-nav__link">
+    <span title="/get_started/install.rst#cmake-configuration-example (reference label)" class="md-ellipsis">CMake Configuration Example</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#conclusion" class="md-nav__link">
     <span title="/get_started/install.rst#conclusion (reference label)" class="md-ellipsis">Conclusion</span>
   </a>
@@ -506,6 +526,26 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#build-your-own-solver" class="md-nav__link">
+    <span title="/get_started/install.rst#build-your-own-solver (reference label)" class="md-ellipsis">Build Your Own Solver</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Build Your Own Solver">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cmake-configuration-example" class="md-nav__link">
+    <span title="/get_started/install.rst#cmake-configuration-example (reference label)" class="md-ellipsis">CMake Configuration Example</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#conclusion" class="md-nav__link">
     <span title="/get_started/install.rst#conclusion (reference label)" class="md-ellipsis">Conclusion</span>
   </a>
@@ -588,6 +628,153 @@ The build process may take about 3 minutes to complete. Once finished, you shoul
 </li>
 <li><p>The script will compile the CVRP or TW solver and run a small test instance (P-n20-k2.vrp). If the test succeeds, you are all set!</p></li>
 </ol>
+<h2 id="build-your-own-solver">Build Your Own Solver<a class="headerlink" href="#build-your-own-solver" title="Link to this heading">¶</a></h2>
+<p>After completing the build steps, dependencies are already installed, allowing you to create your own solver utilizing packages provided by RouteOpt. To accomplish this, you need to configure your own CMake project.</p>
+<p>The following dependencies are required and also already installed, so you only need to link them in your CMake project:</p>
+<ul class="simple">
+<li><p><strong>Boost</strong> (header-only; include directories required)</p></li>
+<li><p><strong>Eigen</strong> (header-only; include directories required)</p></li>
+<li><p><strong>CVRPSEP</strong> (include directories and libraries)</p></li>
+<li><p><strong>Gurobi</strong> (include directories and libraries)</p></li>
+<li><p><strong>XGBoost</strong> (include directories and libraries)</p></li>
+</ul>
+<p>You can integrate the following packages into your CMake project:</p>
+<ul>
+<li><p><strong>external</strong>: External packages required by RouteOpt</p>
+<p>(added via: <code class="docutils literal notranslate"><span class="pre">add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../../external</span> <span class="pre">external_build)</span></code>)</p>
+</li>
+<li><p><strong>common</strong>: Shared utilities and include files</p>
+<p>(added via: <code class="docutils literal notranslate"><span class="pre">add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../../common</span> <span class="pre">common_build)</span></code>)</p>
+</li>
+<li><p><strong>branching</strong>: Branching strategies</p>
+<p>(added via: <code class="docutils literal notranslate"><span class="pre">add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../../branching</span> <span class="pre">branching_build)</span></code>)</p>
+</li>
+<li><p><strong>rounded_cap_cuts</strong>: Packages for rounded cap cuts</p>
+<p>(added via: <code class="docutils literal notranslate"><span class="pre">add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../../rounded_cap_cuts</span> <span class="pre">rcc_build)</span></code>)</p>
+</li>
+<li><p><strong>rank1_cuts</strong>: Packages for rank1 cuts</p>
+<p>(added via: <code class="docutils literal notranslate"><span class="pre">add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../../rank1_cuts</span> <span class="pre">rank1_cuts_build)</span></code>)</p>
+</li>
+</ul>
+<p>Include the following directories and libraries in your CMake project configuration:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><code><span class="nb">include_directories</span><span class="p">(</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">BOOST_INCLUDE_DIRS</span><span class="o">}</span><span class="w">       </span><span class="c"># Boost include directories</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">EIGEN_INCLUDE_DIRS</span><span class="o">}</span><span class="w">       </span><span class="c"># Eigen include directories</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">CVRPSEP_INCLUDE_DIRS</span><span class="o">}</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">GUROBI_INCLUDE_DIRS</span><span class="o">}</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">XGB_INCLUDE_DIRS</span><span class="o">}</span>
+<span class="w">    </span><span class="c"># Additional directories can be included as needed</span>
+<span class="p">)</span>
+
+<span class="c"># Link external libraries to the project</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span>
+<span class="w">    </span><span class="s">PRIVATE</span>
+<span class="w">    </span><span class="s">COMMON_INCLUDES</span>
+<span class="w">    </span><span class="s">BRANCHING_INCLUDES</span>
+<span class="w">    </span><span class="s">ROUNDED_CAP_CUTS_INCLUDES</span>
+<span class="w">    </span><span class="s">RANK1_CUTS_INCLUDES</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">GUROBI_LIBRARIES</span><span class="o">}</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">CVRPSEP_LIBRARIES</span><span class="o">}</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">XGB_LIBRARIES</span><span class="o">}</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">HGS_LIBRARIES</span><span class="o">}</span>
+<span class="w">    </span><span class="c"># Additional libraries can be linked as needed</span>
+<span class="p">)</span>
+</code></pre></div>
+</div>
+<p>Once these steps are completed, your solver is successfully configured.</p>
+<h3 id="cmake-configuration-example">CMake Configuration Example<a class="headerlink" href="#cmake-configuration-example" title="Link to this heading">¶</a></h3>
+<p>Below is a complete example of a <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file configuring a CVRP application using RouteOpt packages:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><code><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.10</span><span class="p">)</span>
+<span class="nb">project</span><span class="p">(</span><span class="s">cvrp</span><span class="w"> </span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.0</span><span class="p">)</span>
+
+<span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD</span><span class="w"> </span><span class="s">17</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD_REQUIRED</span><span class="w"> </span><span class="s">ON</span><span class="p">)</span>
+
+<span class="nb">if</span><span class="w"> </span><span class="p">(</span><span class="s">NOT</span><span class="w"> </span><span class="s">CMAKE_BUILD_TYPE</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_BUILD_TYPE</span><span class="w"> </span><span class="s">Release</span><span class="p">)</span>
+<span class="nb">endif</span><span class="w"> </span><span class="p">()</span>
+
+<span class="nb">option</span><span class="p">(</span><span class="s">ENABLE_VALGRIND_MEM_CHECK</span><span class="w"> </span><span class="s2">&quot;Enable Valgrind Memory Check&quot;</span><span class="w"> </span><span class="s">OFF</span><span class="p">)</span>
+
+<span class="nb">if</span><span class="w"> </span><span class="p">(</span><span class="s">ENABLE_VALGRIND_MEM_CHECK</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">add_compile_definitions</span><span class="p">(</span><span class="s">VALGRIND_MEM_CHECK</span><span class="p">)</span>
+<span class="nb">endif</span><span class="w"> </span><span class="p">()</span>
+
+<span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_RUNTIME_OUTPUT_DIRECTORY</span><span class="w"> </span><span class="o">${</span><span class="nv">CMAKE_SOURCE_DIR</span><span class="o">}</span><span class="s">/bin</span><span class="p">)</span>
+
+<span class="c"># Add subdirectories for external packages and common utilities</span>
+<span class="nb">add_subdirectory</span><span class="p">(</span><span class="o">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="o">}</span><span class="s">/../../external</span><span class="w"> </span><span class="s">external_build</span><span class="p">)</span>
+<span class="nb">add_subdirectory</span><span class="p">(</span><span class="o">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="o">}</span><span class="s">/../../common</span><span class="w"> </span><span class="s">common_build</span><span class="p">)</span>
+<span class="nb">add_subdirectory</span><span class="p">(</span><span class="o">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="o">}</span><span class="s">/../../branching</span><span class="w"> </span><span class="s">branching_build</span><span class="p">)</span>
+<span class="nb">add_subdirectory</span><span class="p">(</span><span class="o">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="o">}</span><span class="s">/../../rounded_cap_cuts</span><span class="w"> </span><span class="s">rcc_build</span><span class="p">)</span>
+<span class="nb">add_subdirectory</span><span class="p">(</span><span class="o">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="o">}</span><span class="s">/../../rank1_cuts</span><span class="w"> </span><span class="s">rank1_cuts_build</span><span class="p">)</span>
+
+<span class="c"># Extend the CMake module path if needed</span>
+<span class="nb">list</span><span class="p">(</span><span class="s">APPEND</span><span class="w"> </span><span class="s">CMAKE_MODULE_PATH</span><span class="w"> </span><span class="s2">&quot;${CMAKE_CURRENT_SOURCE_DIR}/lib/cmake_modules&quot;</span><span class="p">)</span>
+
+<span class="c"># Find required packages</span>
+<span class="nb">find_package</span><span class="p">(</span><span class="s">HGS</span><span class="w"> </span><span class="s">REQUIRED</span><span class="p">)</span>
+<span class="nb">find_package</span><span class="p">(</span><span class="s">ZLIB</span><span class="w"> </span><span class="s">REQUIRED</span><span class="p">)</span>
+
+<span class="c"># Include directories for external dependencies (Boost and Eigen are header-only)</span>
+<span class="nb">include_directories</span><span class="p">(</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">BOOST_INCLUDE_DIRS</span><span class="o">}</span><span class="w">       </span><span class="c"># Boost include directories</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">EIGEN_INCLUDE_DIRS</span><span class="o">}</span><span class="w">       </span><span class="c"># Eigen include directories</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">CVRPSEP_INCLUDE_DIRS</span><span class="o">}</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">GUROBI_INCLUDE_DIRS</span><span class="o">}</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">XGB_INCLUDE_DIRS</span><span class="o">}</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">HGS_INCLUDE_DIRS</span><span class="o">}</span>
+<span class="p">)</span>
+
+<span class="c"># Project-specific include directories</span>
+<span class="nb">include_directories</span><span class="p">(</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="o">}</span><span class="s">/src/main/include</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="o">}</span><span class="s">/src/vrptw/include</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="o">}</span><span class="s">/src/add_column/include</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="o">}</span><span class="s">/src/cuts/include</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="o">}</span><span class="s">/src/pricing/include</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="o">}</span><span class="s">/src/l2b/include</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="o">}</span><span class="s">/src/read_data/include</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="o">}</span><span class="s">/src/heuristics/include</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="o">}</span><span class="s">/src/initial/include</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="o">}</span><span class="s">/src/node/include</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="o">}</span><span class="s">/src/two_stage/include</span>
+<span class="p">)</span>
+
+<span class="c"># Gather source files</span>
+<span class="nb">file</span><span class="p">(</span><span class="s">GLOB_RECURSE</span><span class="w"> </span><span class="s">CVRP_SOURCES</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="o">}</span><span class="s">/src/main/src/*.cpp</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="o">}</span><span class="s">/src/vrptw/src/*.cpp</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="o">}</span><span class="s">/src/add_column/src/*.cpp</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="o">}</span><span class="s">/src/cuts/src/*.cpp</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="o">}</span><span class="s">/src/pricing/src/*.cpp</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="o">}</span><span class="s">/src/l2b/src/*.cpp</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="o">}</span><span class="s">/src/read_data/src/*.cpp</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="o">}</span><span class="s">/src/heuristics/src/*.cpp</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="o">}</span><span class="s">/src/initial/src/*.cpp</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="o">}</span><span class="s">/src/node/src/*.cpp</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="o">}</span><span class="s">/src/main.cpp</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="o">}</span><span class="s">/src/two_stage/src/*.cpp</span>
+<span class="p">)</span>
+
+<span class="c"># Create the executable target</span>
+<span class="nb">add_executable</span><span class="p">(</span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span><span class="w"> </span><span class="o">${</span><span class="nv">CVRP_SOURCES</span><span class="o">}</span><span class="p">)</span>
+
+<span class="c"># Link external libraries to the project</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span>
+<span class="w">    </span><span class="s">PRIVATE</span>
+<span class="w">    </span><span class="s">COMMON_INCLUDES</span>
+<span class="w">    </span><span class="s">BRANCHING_INCLUDES</span>
+<span class="w">    </span><span class="s">ROUNDED_CAP_CUTS_INCLUDES</span>
+<span class="w">    </span><span class="s">RANK1_CUTS_INCLUDES</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">GUROBI_LIBRARIES</span><span class="o">}</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">CVRPSEP_LIBRARIES</span><span class="o">}</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">XGB_LIBRARIES</span><span class="o">}</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">HGS_LIBRARIES</span><span class="o">}</span>
+<span class="w">    </span><span class="s">ZLIB::ZLIB</span>
+<span class="p">)</span>
+</code></pre></div>
+</div>
 <h2 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">¶</a></h2>
 <p>After following these steps, RouteOpt and all required packages should be built successfully.
 Enjoy optimizing your routing problems with RouteOpt!</p>
