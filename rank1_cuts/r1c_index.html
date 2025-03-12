@@ -815,9 +815,12 @@ the <strong>limited memory technique</strong> is employed to achieve similar per
 <h5 id="with-limited-memory-techniques">With Limited Memory Techniques<a class="headerlink" href="#with-limited-memory-techniques" title="Link to this heading">¶</a></h5>
 <p>With limited memory, an additional check is introduced during the extension phase:</p>
 <ul class="simple">
-<li><p>When extending from node <span class="math notranslate nohighlight">\(i\)</span> to node <span class="math notranslate nohighlight">\(j\)</span>, perform the following:
-- For <strong>node memory</strong>, verify whether <span class="math notranslate nohighlight">\(j \in M_n\)</span>.
-- For <strong>arc memory</strong>, verify whether <span class="math notranslate nohighlight">\((i, j) \in M_a\)</span>.</p></li>
+<li><p>When extending from node <span class="math notranslate nohighlight">\(i\)</span> to node <span class="math notranslate nohighlight">\(j\)</span>, perform the following:</p>
+<ul>
+<li><p>For <strong>node memory</strong>, verify whether <span class="math notranslate nohighlight">\(j \in M_n\)</span>.</p></li>
+<li><p>For <strong>arc memory</strong>, verify whether <span class="math notranslate nohighlight">\((i, j) \in M_a\)</span>.</p></li>
+</ul>
+</li>
 <li><p>If the node or arc is present in the memory set, the current state remains unchanged.</p></li>
 <li><p>Otherwise, the state is reset to 0.</p></li>
 </ul>

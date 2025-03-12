@@ -131,6 +131,7 @@ With Limited Memory Techniques
 With limited memory, an additional check is introduced during the extension phase:
 
 - When extending from node :math:`i` to node :math:`j`, perform the following:
+
   - For **node memory**, verify whether :math:`j \in M_n`.
   - For **arc memory**, verify whether :math:`(i, j) \in M_a`.
 
