@@ -520,7 +520,13 @@ create a solver instance, define a cost matrix, and then use the Rank1Separation
    }
 
 .. note::
-   The Rank-1 separation module offers a myriad of interesting and useful features that are not fully covered in this document. For a deeper understanding, I recommend exploring the function usages directly in the source code located under ``packages/application/cvrp/src`` using an IDE such as CLion.
+   The new cuts obtained may contain some of the old cuts, but definitely with larger memory set, and thus,
+   make the old cuts no longer tight. Therefore, it is recommended to identify the duplicated cuts in old cuts set,
+   and remove them from the old cuts set before/after you add new cuts to the LP model.
+
+.. note::
+   The Rank-1 separation module offers a myriad of interesting and useful features that are not fully covered in this document.
+   For a deeper understanding, I recommend exploring the function usages directly in the source code located under ``packages/application/cvrp/src`` using an IDE such as CLion.
 
    Reviewing the source code of the CVRP application related to the Rank-1 separation module will provide valuable insights into how to use these features effectively.
 
