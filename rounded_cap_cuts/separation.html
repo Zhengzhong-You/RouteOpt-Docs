@@ -501,6 +501,22 @@
   
 
     
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deluxing/deluxing_index.html" class="md-nav__link">
+        <span title="/deluxing/deluxing_index.rst (reference label)" class="md-ellipsis">De<wbr>Luxing</span>
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -625,7 +641,7 @@ manages the RCC separation process. It provides a static method to collect new R
 <li><p>Instance dimension.</p></li>
 <li><p>Capacity.</p></li>
 <li><p>Customer demand vector.</p></li>
-<li><p>Flags for keeping cuts, forcing the first RCC form, and applying a strengthened RCC form.</p></li>
+<li><p>Flags for keeping cuts and applying a strengthened RCC form.</p></li>
 <li><p>Solution vector from the LP relaxation.</p></li>
 <li><p>A vector of <code class="docutils literal notranslate"><span class="pre">SequenceInfo</span></code> objects representing solution routes or sequences.</p></li>
 <li><p>A vector of existing RCCs to avoid duplicates.</p></li>
@@ -646,7 +662,6 @@ solution data.</p>
 <li><p><strong>cap</strong>: A double representing the capacity constraint used in cut generation.</p></li>
 <li><p><strong>demand</strong>: A vector of doubles where each entry corresponds to the demand at a customer.</p></li>
 <li><p><strong>if_keep_rcc</strong>: A boolean flag to set whether newly generated RCCs should be retained.</p></li>
-<li><p><strong>if_force_first_form</strong>: A boolean flag specifying whether to force the use of the first RCC form.</p></li>
 <li><p><strong>if_strengthen_rcc</strong>: A boolean flag indicating whether RCCs should be strengthened (i.e., using form 3).</p></li>
 <li><p><strong>sol_x</strong>: A vector of doubles containing fractional solution values from the LP relaxation.</p></li>
 <li><p><strong>sols</strong>: A vector of <code class="docutils literal notranslate"><span class="pre">SequenceInfo</span></code> objects representing solution routes or sequences.</p></li>
@@ -693,7 +708,6 @@ generate cuts that can strengthen the LP relaxation of the Capacitated Vehicle R
 <span class="w">                                 </span><span class="kt">double</span><span class="w"> </span><span class="n">cap</span><span class="p">,</span>
 <span class="w">                                 </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">demand</span><span class="p">,</span>
 <span class="w">                                 </span><span class="kt">bool</span><span class="w"> </span><span class="n">if_keep_rcc</span><span class="p">,</span>
-<span class="w">                                 </span><span class="kt">bool</span><span class="w"> </span><span class="n">if_force_first_form</span><span class="p">,</span>
 <span class="w">                                 </span><span class="kt">bool</span><span class="w"> </span><span class="n">if_strengthen_rcc</span><span class="p">,</span>
 <span class="w">                                 </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">sol_x</span><span class="p">,</span>
 <span class="w">                                 </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">SequenceInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">sols</span><span class="p">,</span>
@@ -726,7 +740,6 @@ generate cuts that can strengthen the LP relaxation of the Capacitated Vehicle R
 <span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">cap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">100.0</span><span class="p">;</span><span class="w">                 </span><span class="c1">// Vehicle capacity</span>
 <span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">demand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* demand values for each customer */</span><span class="w"> </span><span class="p">};</span>
 <span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">if_keep_rcc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w">            </span><span class="c1">// Flag to keep newly generated RCCs</span>
-<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">if_force_first_form</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w">   </span><span class="c1">// Do not force the first RCC form</span>
 <span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">if_strengthen_rcc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w">      </span><span class="c1">// Apply strengthened RCC form (form 3)</span>
 <span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">sol_x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* fractional LP solution values */</span><span class="w"> </span><span class="p">};</span>
 
@@ -742,7 +755,6 @@ generate cuts that can strengthen the LP relaxation of the Capacitated Vehicle R
 <span class="w">    </span><span class="c1">// Generate new RCCs using the static method.</span>
 <span class="w">    </span><span class="n">RCCSeparationController</span><span class="o">::</span><span class="n">generateRCCs</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span><span class="w"> </span><span class="n">cap</span><span class="p">,</span><span class="w"> </span><span class="n">demand</span><span class="p">,</span>
 <span class="w">                                          </span><span class="n">if_keep_rcc</span><span class="p">,</span>
-<span class="w">                                          </span><span class="n">if_force_first_form</span><span class="p">,</span>
 <span class="w">                                          </span><span class="n">if_strengthen_rcc</span><span class="p">,</span>
 <span class="w">                                          </span><span class="n">sol_x</span><span class="p">,</span><span class="w"> </span><span class="n">sols</span><span class="p">,</span>
 <span class="w">                                          </span><span class="n">existing_rccs</span><span class="p">,</span><span class="w"> </span><span class="n">new_rccs</span><span class="p">);</span>

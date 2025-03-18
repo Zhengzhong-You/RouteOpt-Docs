@@ -503,6 +503,22 @@
   
 
     
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deluxing/deluxing_index.html" class="md-nav__link">
+        <span title="/deluxing/deluxing_index.rst (reference label)" class="md-ellipsis">De<wbr>Luxing</span>
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -668,10 +684,12 @@ function within the <code class="docutils literal notranslate"><span class="pre"
 </span>Excerpt from workflow.hpp<a class="headerlink" href="#id1" title="Permalink to this code">¶</a></span></div>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">Node</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">BrCType</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">Hasher</span><span class="o">&gt;</span>
 <span class="kt">void</span><span class="w"> </span><span class="n">BBTController</span><span class="o">&lt;</span><span class="n">Node</span><span class="p">,</span><span class="w"> </span><span class="n">BrCType</span><span class="p">,</span><span class="w"> </span><span class="n">Hasher</span><span class="o">&gt;::</span><span class="n">solve</span><span class="p">(</span><span class="n">Node</span><span class="w"> </span><span class="o">*</span><span class="n">root_node</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Add the root node to the tree.</span>
-<span class="w">    </span><span class="n">addNode</span><span class="p">(</span><span class="n">root_node</span><span class="p">);</span>
+
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">tryReadNodeIn</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">)</span>
 <span class="w">        </span><span class="n">tryReadNodeIn</span><span class="p">(</span><span class="n">root_node</span><span class="p">,</span><span class="w"> </span><span class="n">branching_history</span><span class="p">,</span><span class="w"> </span><span class="n">bkf_data_shared</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Add the root node to the tree.</span>
+<span class="w">    </span><span class="n">addNode</span><span class="p">(</span><span class="n">root_node</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">tree</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="c1">// Select and remove the first node from the tree.</span>

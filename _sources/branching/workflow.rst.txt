@@ -79,10 +79,12 @@ function within the ``BBTController`` class template:
 
    template<typename Node, typename BrCType, typename Hasher>
    void BBTController<Node, BrCType, Hasher>::solve(Node *root_node) {
-       // Add the root node to the tree.
-       addNode(root_node);
+
        if (tryReadNodeIn != nullptr)
            tryReadNodeIn(root_node, branching_history, bkf_data_shared);
+
+       // Add the root node to the tree.
+       addNode(root_node);
 
        while (!tree.empty()) {
            // Select and remove the first node from the tree.
