@@ -242,24 +242,6 @@ convert2ArcMemory()
 
   **Meaning**: Contains cuts in a node-memory representation which will be converted to an arc-memory representation for improved pricing performance.
 
-getIfOnceUseNoSymmetryMem()
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-- **Return Value**
-
-  *Output*: A boolean flag.
-
-  **Meaning**: Indicates whether the "no symmetry memory" approach has been applied at least once. This flag is useful for diagnostic purposes.
-
-.. note::
-   When performing bi-directional labeling in non-symmetric problems, it is crucial to decide whether to change your resource meet point.
-
-   If you have already employed the "no symmetry memory" (i.e., arc memory) and then change your resource meet point, an arc (e.g., 2→3) may be interpreted as 3→2 in your solution vector.
-
-   Since 2→3 and 3→2 represent different memory arcs, this change will alter the column coefficients of the cut, typically resulting in a weaker cut compared to the original.
-
-   Nevertheless, the cut remains valid.
-
-
 
 Header Codes
 -------------

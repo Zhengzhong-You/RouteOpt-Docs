@@ -173,8 +173,8 @@ Below is an excerpt from ``rank1_coefficient_controller.hpp`` that illustrates t
            ~Rank1CoefficientGetter() = default;
 
        private:
-           std::vector<std::pair<r1cIndex, std::vector<int> > > lp_v_cut_map{};
-           std::vector<std::vector<std::vector<int> > > lp_v_v_use_states{};
+           std::vector<std::pair<std::vector<int>, std::vector<int> > > lp_v_cut_map{};
+           std::vector<std::vector<r1cIndex> > lp_v_v_use_states{};
            std::vector<int> lp_r1c_denominator{};
 
            const std::reference_wrapper<Rank1CutsDataShared> data_shared_ref;

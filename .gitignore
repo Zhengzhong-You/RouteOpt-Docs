@@ -1,0 +1,23 @@
+# macOS system files
+.DS_Store
+**/.DS_Store
+
+# IntelliJ IDEA project files
+.idea/
+*.iml
+modules.xml
+vcs.xml
+
+# Sphinx build and source folders
+_build/
+_sources/
+
+# Python bytecode and cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# General logs and temp files
+*.log
+*.tmp
+
