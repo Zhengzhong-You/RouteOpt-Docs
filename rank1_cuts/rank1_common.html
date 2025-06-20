@@ -695,8 +695,8 @@ Defined as: <code class="docutils literal notranslate"><span class="pre">std::bi
 <p>A vector that stores additional memory related to arc data. Each element is a pair representing two arcs, i → j and j → i, so it technically functions as edge memory (<cite>edge_mem</cite>).
 Exploiting this symmetry offers certain advantages over treating arcs independently, as doing otherwise typically results in weaker cuts.</p>
 <p><em>Example:</em></p>
-<p><code class="docutils literal notranslate"><span class="pre">arc_mem</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">{1,</span> <span class="pre">2},</span> <span class="pre">{3,</span> <span class="pre">4}</span> <span class="pre">}</span></code>
-This example indicates the presence of arcs 1 → 2, 2 → 1, and 3 → 4, 4 → 3. Note that each customer in <span class="math notranslate nohighlight">\(C\)</span> must appear in at least one arc defined in <cite>arc_mem</cite>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">arc_mem</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">{1,</span> <span class="pre">2},</span> <span class="pre">{3,</span> <span class="pre">4}</span> <span class="pre">}</span></code></p>
+<p>This example indicates the presence of arcs 1 → 2, 2 → 1, and 3 → 4, 4 → 3. Note that each customer in <span class="math notranslate nohighlight">\(C\)</span> must appear in at least one arc defined in <cite>arc_mem</cite>.</p>
 </li>
 </ul>
 <h2 id="class-rank1cutsdatashared">Class: Rank1CutsDataShared<a class="headerlink" href="#class-rank1cutsdatashared" title="Link to this heading">¶</a></h2>

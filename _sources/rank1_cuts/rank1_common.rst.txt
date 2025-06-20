@@ -91,6 +91,7 @@ The structure ``R1c`` represents a Rank-1 cut and includes the following members
   *Example:*
 
   ``arc_mem = { {1, 2}, {3, 4} }``
+
   This example indicates the presence of arcs 1 → 2, 2 → 1, and 3 → 4, 4 → 3. Note that each customer in :math:`C` must appear in at least one arc defined in `arc_mem`.
 
 
