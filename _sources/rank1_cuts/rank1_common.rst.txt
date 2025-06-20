@@ -85,13 +85,13 @@ The structure ``R1c`` represents a Rank-1 cut and includes the following members
 
 - **arc_mem**
 
- A vector that stores additional memory related to arc data. Each element is a pair representing two arcs, i → j and j → i, so it technically functions as edge memory (`edge_mem`).
- Exploiting this symmetry offers certain advantages over treating arcs independently, as doing otherwise typically results in weaker cuts.
+  A vector that stores additional memory related to arc data. Each element is a pair representing two arcs, i → j and j → i, so it technically functions as edge memory (`edge_mem`).
+  Exploiting this symmetry offers certain advantages over treating arcs independently, as doing otherwise typically results in weaker cuts.
 
- *Example:*
+  *Example:*
 
- ``arc_mem = { {1, 2}, {3, 4} }``
- This example indicates the presence of arcs 1 → 2, 2 → 1, and 3 → 4, 4 → 3. Note that each customer in :math:`C` must appear in at least one arc defined in `arc_mem`.
+  ``arc_mem = { {1, 2}, {3, 4} }``
+  This example indicates the presence of arcs 1 → 2, 2 → 1, and 3 → 4, 4 → 3. Note that each customer in :math:`C` must appear in at least one arc defined in `arc_mem`.
 
 
 Class: Rank1CutsDataShared
