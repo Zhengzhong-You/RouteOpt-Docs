@@ -141,14 +141,10 @@ Below is an excerpt from ``rank1_rc_controller.hpp`` that illustrates the struct
        };
 
        struct R1CUseStates {
+           r1cIndex union_map{};
            std::vector<int> v_union_mem;
-           std::pair<std::vector<int>, std::vector<int> > add_vec{};
-
-           R1CUseStates(int cut_dim) {
-               add_vec.first.assign(cut_dim, 0);
-           }
-
-           R1CUseStates() = delete;
+           std::vector<std::pair<int, int>> sparse;
+           r1cIndex sparse_map{};
        };
 
        class Rank1RCController {
@@ -202,7 +198,7 @@ Below is an excerpt from ``rank1_rc_controller.hpp`` that illustrates the struct
        private:
            int *label_int_space{};
            std::vector<R1CUseStates> cg_v_cut_map{};
-           std::vector<std::vector<r1cIndex> > cg_v_v_use_states{};
+           std::vector<std::vector<std::vector<int>>> cg_v_v_use_states{};
            std::vector<int> cg_r1c_denominator{};
            std::vector<double> rank1_dual{};
            std::vector<double> revised_rank1_dual{};

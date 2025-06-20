@@ -425,13 +425,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#getifonceusenosymmetrymem" class="md-nav__link">
-    <span title="/rank1_cuts/separation.rst#getifonceusenosymmetrymem (reference label)" class="md-ellipsis">get<wbr>If<wbr>Once<wbr>Use<wbr>No<wbr>Symmetry<wbr>Mem<wbr>()</span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -641,13 +634,6 @@
           <li class="md-nav__item">
   <a href="#convert2arcmemory" class="md-nav__link">
     <span title="/rank1_cuts/separation.rst#convert2arcmemory (reference label)" class="md-ellipsis">convert2Arc<wbr>Memory<wbr>()</span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#getifonceusenosymmetrymem" class="md-nav__link">
-    <span title="/rank1_cuts/separation.rst#getifonceusenosymmetrymem (reference label)" class="md-ellipsis">get<wbr>If<wbr>Once<wbr>Use<wbr>No<wbr>Symmetry<wbr>Mem<wbr>()</span>
   </a>
   
 </li>
@@ -879,20 +865,6 @@ that are bad for labeling but have no impact on the pricing problem in <code cla
 <p><strong>Meaning</strong>: Contains cuts in a node-memory representation which will be converted to an arc-memory representation for improved pricing performance.</p>
 </li>
 </ul>
-<h3 id="getifonceusenosymmetrymem">getIfOnceUseNoSymmetryMem()<a class="headerlink" href="#getifonceusenosymmetrymem" title="Link to this heading">¶</a></h3>
-<ul>
-<li><p><strong>Return Value</strong></p>
-<p><em>Output</em>: A boolean flag.</p>
-<p><strong>Meaning</strong>: Indicates whether the “no symmetry memory” approach has been applied at least once. This flag is useful for diagnostic purposes.</p>
-</li>
-</ul>
-<div class="note admonition">
-<p class="admonition-title">Note</p>
-<p>When performing bi-directional labeling in non-symmetric problems, it is crucial to decide whether to change your resource meet point.</p>
-<p>If you have already employed the “no symmetry memory” (i.e., arc memory) and then change your resource meet point, an arc (e.g., 2→3) may be interpreted as 3→2 in your solution vector.</p>
-<p>Since 2→3 and 3→2 represent different memory arcs, this change will alter the column coefficients of the cut, typically resulting in a weaker cut compared to the original.</p>
-<p>Nevertheless, the cut remains valid.</p>
-</div>
 <h2 id="header-codes">Header Codes<a class="headerlink" href="#header-codes" title="Link to this heading">¶</a></h2>
 <p>Below is an excerpt from <code class="docutils literal notranslate"><span class="pre">rank1_separation_macro.hpp</span></code> that illustrates key macro definitions and type aliases:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span class="cm">/*</span>
