@@ -1,0 +1,133 @@
+RCCs: Common Header
+======================================
+
+Overview
+--------
+The file ``packages/rounded_cap_cuts/common/include/rcc_macro.hpp`` defines data structures, and utility operators used for managing
+Rounded Capacity Cuts (RCCs) within the RouteOpt software package.
+
+License
+^^^^^^^
+This software is licensed under **GPL-3.0**.
+
+File Contents
+^^^^^^^^^^^^^
+The header file includes the following key sections:
+
+- **Enumeration Class:** ``RCCForm``
+- **Structure:** ``Rcc``
+- **Operator:** Overloaded equality operator for comparing RCC instances
+
+Enumeration: RCCForm
+--------------------
+The enumeration ``RCCForm`` represents the different formulations of RCCs.
+Refer to the :doc:`Introduction page <rcc_index>` for a detailed explanation of the RCC forms.
+
+- ``RCC_FORM_1``: Standard RCC formulation based on internal customer grouping.
+- ``RCC_FORM_2``: Alternate RCC formulation that typically utilizes outside customer grouping.
+- ``RCC_FORM_3``: A strengthened version of capacity cuts, intended for use only in the enumeration phase.
+
+Structure: Rcc
+--------------
+The structure ``Rcc`` encapsulates all the necessary information to describe a single Rounded Capacity Cut, including:
+
+- **form_rcc**
+
+  An integer indicating the RCC formulation in use. This determines which customer information vector is relevant.
+
+- **info_rcc_customer**
+
+  A vector of integers representing the customer set :math:`S` used in RCC_FORM_1 or RCC_FORM_3.
+
+- **info_rcc_outside_customer**
+
+  A vector of integers representing the customer set outside :math:`S`, used in RCC_FORM_2.
+
+- **rhs**
+
+  A double value representing the right-hand side (rhs) of the RCC constraint.
+
+- **idx_rcc**
+
+  An integer indicating the row index of the RCC in the constraint matrix.
+
+- **if_keep**
+
+  A boolean flag indicating whether this RCC is retained during the optimization process (default is false).
+
+Operator: Overloaded Equality Operator
+----------------------------------------
+The overloaded equality operator ``operator==`` allows for comparing two RCC instances. Two RCCs are considered equal if:
+
+- They have the same right-hand side (rhs) value.
+
+- They use the same RCC form (``form_rcc``).
+
+- For ``RCC_FORM_1`` and ``RCC_FORM_3``, their respective ``info_rcc_customer`` vectors are identical.
+
+- For ``RCC_FORM_2``, their respective ``info_rcc_outside_customer`` vectors are identical.
+
+.. code-block:: cpp
+   :caption: rcc_macro.hpp
+
+   /*
+    * Copyright (c) 2025 Zhengzhong (Ricky) You.
+    * All rights reserved.
+    * Software: RouteOpt
+    * License: GPL-3.0
+    */
+
+   /*
+    * @file rcc_macro.hpp
+    * @brief Definitions for Rounded Capacity Cuts (RCCs) and related data structures in RouteOpt.
+    *
+    * This header defines enumerations of RCC form, structures of RCC, and utility operators used for managing
+    * RCCs in RouteOpt. RCCs are used to strengthen the LP relaxation of formulations for capacitated vehicle routing problems.
+    */
+
+   #ifndef ROUTE_OPT_RCC_MACRO_HPP
+   #define ROUTE_OPT_RCC_MACRO_HPP
+
+   #include <vector>
+
+   namespace RouteOpt::RCCs {
+
+       enum class RCCForm {
+           RCC_FORM_1 = 1,
+           RCC_FORM_2 = 2,
+           RCC_FORM_3 = 3
+       };
+
+       struct Rcc {
+           int form_rcc{};
+           std::vector<int> info_rcc_customer{};
+           std::vector<int> info_rcc_outside_customer{};
+           double rhs{};
+           int idx_rcc{};
+           bool if_keep{};
+       };
+
+       inline bool operator==(const Rcc &lhs, const Rcc &rhs) {
+           if (lhs.rhs != rhs.rhs) return false;
+           if (lhs.form_rcc != rhs.form_rcc) return false;
+           if (lhs.form_rcc == static_cast<int>(RCCForm::RCC_FORM_1) ||
+               lhs.form_rcc == static_cast<int>(RCCForm::RCC_FORM_3)) {
+               if (lhs.info_rcc_customer != rhs.info_rcc_customer) {
+                   return false;
+               }
+           } else {
+               if (lhs.info_rcc_outside_customer != rhs.info_rcc_outside_customer) {
+                   return false;
+               }
+           }
+           return true;
+       }
+   }
+
+   #endif // ROUTE_OPT_RCC_MACRO_HPP
+
+Conclusion
+----------
+The ``rcc_macro.hpp`` header is essential for implementing Rounded Capacity Cuts in RouteOpt.
+This file provides a clear, modular approach to managing capacity-related constraints,
+facilitating enhanced solution quality in complex routing scenarios.

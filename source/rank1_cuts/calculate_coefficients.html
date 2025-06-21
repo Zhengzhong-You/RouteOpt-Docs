@@ -1,0 +1,991 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="">
+    
+    
+      
+        <title>R1Cs: Coefficient Getter - RouteOpt  documentation</title>
+      
+    
+    
+      
+        
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+        <link rel="stylesheet" type="text/css" href="../_static/sphinx_immaterial_theme.02cb18745d09eea51.min.css?v=ff456132" />
+        <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+        <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=ae161c19" />
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="blue">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#overview" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="RouteOpt  documentation" class="md-header__button md-logo" aria-label="RouteOpt  documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            RouteOpt  documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              R1Cs: Coefficient Getter
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="green" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9v1Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Zhengzhong-You/RouteOpt" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    RouteOpt
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="RouteOpt  documentation" class="md-nav__button md-logo" aria-label="RouteOpt  documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+    </a>
+    RouteOpt  documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Zhengzhong-You/RouteOpt" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    RouteOpt
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get_started/start_index.html" class="md-nav__link">
+        <span title="/get_started/start_index.rst (reference label)" class="md-ellipsis">Get Started</span>
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../common/config.html" class="md-nav__link">
+        <span title="/common/config.rst (reference label)" class="md-ellipsis">Route<wbr>Opt Core Macros, Constants, and Utilities</span>
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../common/solver.html" class="md-nav__link">
+        <span title="/common/solver.rst (reference label)" class="md-ellipsis">Solver Interface</span>
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="r1c_index.html"><span title="/rank1_cuts/r1c_index.rst (reference label)" class="md-ellipsis">Rank-<wbr>1 Cuts</span></a>
+          
+            <label for="__nav_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="Rank-1 Cuts" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          <span title="/rank1_cuts/r1c_index.rst (reference label)" class="md-ellipsis">Rank-<wbr>1 Cuts</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="rank1_common.html" class="md-nav__link">
+        <span title="/rank1_cuts/rank1_common.rst (reference label)" class="md-ellipsis">R1Cs:<wbr> Common Header</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="separation.html" class="md-nav__link">
+        <span title="/rank1_cuts/separation.rst (reference label)" class="md-ellipsis">R1Cs:<wbr> Separation</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="update_reduced_cost.html" class="md-nav__link">
+        <span title="/rank1_cuts/update_reduced_cost.rst (reference label)" class="md-ellipsis">R1Cs:<wbr> RC Updater</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          <span title="/rank1_cuts/calculate_coefficients.rst (reference label)" class="md-ellipsis">R1Cs:<wbr> Coefficient Getter</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="#" class="md-nav__link md-nav__link--active">
+        <span title="/rank1_cuts/calculate_coefficients.rst (reference label)" class="md-ellipsis">R1Cs:<wbr> Coefficient Getter</span>
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span title="/rank1_cuts/calculate_coefficients.rst#overview (reference label)" class="md-ellipsis">Overview</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#license" class="md-nav__link">
+    <span title="/rank1_cuts/calculate_coefficients.rst#license (reference label)" class="md-ellipsis">License</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-contents" class="md-nav__link">
+    <span title="/rank1_cuts/calculate_coefficients.rst#file-contents (reference label)" class="md-ellipsis">File Contents</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rank1coefficientgetter-class" class="md-nav__link">
+    <span title="/rank1_cuts/calculate_coefficients.rst#rank1coefficientgetter-class (reference label)" class="md-ellipsis">Rank1Coefficient<wbr>Getter Class</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Rank1CoefficientGetter Class">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constructor" class="md-nav__link">
+    <span title="/rank1_cuts/calculate_coefficients.rst#constructor (reference label)" class="md-ellipsis">Constructor</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#public-methods" class="md-nav__link">
+    <span title="/rank1_cuts/calculate_coefficients.rst#public-methods (reference label)" class="md-ellipsis">Public Methods</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#private-methods" class="md-nav__link">
+    <span title="/rank1_cuts/calculate_coefficients.rst#private-methods (reference label)" class="md-ellipsis">Private Methods</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#header-code" class="md-nav__link">
+    <span title="/rank1_cuts/calculate_coefficients.rst#header-code (reference label)" class="md-ellipsis">Header Code</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage-example" class="md-nav__link">
+    <span title="/rank1_cuts/calculate_coefficients.rst#usage-example (reference label)" class="md-ellipsis">Usage Example</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span title="/rank1_cuts/calculate_coefficients.rst#conclusion (reference label)" class="md-ellipsis">Conclusion</span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rounded_cap_cuts/rcc_index.html" class="md-nav__link">
+        <span title="/rounded_cap_cuts/rcc_index.rst (reference label)" class="md-ellipsis">Rounded Capacity Cuts</span>
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../branching/branching_index.html" class="md-nav__link">
+        <span title="/branching/branching_index.rst (reference label)" class="md-ellipsis">Branching</span>
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deluxing/deluxing_index.html" class="md-nav__link">
+        <span title="/deluxing/deluxing_index.rst (reference label)" class="md-ellipsis">De<wbr>Luxing</span>
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span title="/rank1_cuts/calculate_coefficients.rst#overview (reference label)" class="md-ellipsis">Overview</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#license" class="md-nav__link">
+    <span title="/rank1_cuts/calculate_coefficients.rst#license (reference label)" class="md-ellipsis">License</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-contents" class="md-nav__link">
+    <span title="/rank1_cuts/calculate_coefficients.rst#file-contents (reference label)" class="md-ellipsis">File Contents</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rank1coefficientgetter-class" class="md-nav__link">
+    <span title="/rank1_cuts/calculate_coefficients.rst#rank1coefficientgetter-class (reference label)" class="md-ellipsis">Rank1Coefficient<wbr>Getter Class</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Rank1CoefficientGetter Class">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constructor" class="md-nav__link">
+    <span title="/rank1_cuts/calculate_coefficients.rst#constructor (reference label)" class="md-ellipsis">Constructor</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#public-methods" class="md-nav__link">
+    <span title="/rank1_cuts/calculate_coefficients.rst#public-methods (reference label)" class="md-ellipsis">Public Methods</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#private-methods" class="md-nav__link">
+    <span title="/rank1_cuts/calculate_coefficients.rst#private-methods (reference label)" class="md-ellipsis">Private Methods</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#header-code" class="md-nav__link">
+    <span title="/rank1_cuts/calculate_coefficients.rst#header-code (reference label)" class="md-ellipsis">Header Code</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage-example" class="md-nav__link">
+    <span title="/rank1_cuts/calculate_coefficients.rst#usage-example (reference label)" class="md-ellipsis">Usage Example</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span title="/rank1_cuts/calculate_coefficients.rst#conclusion (reference label)" class="md-ellipsis">Conclusion</span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset" role="main">
+                  
+
+
+<h1 id="r1cs-coefficient-getter">R1Cs: Coefficient Getter<a class="headerlink" href="#r1cs-coefficient-getter" title="Link to this heading">¶</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
+<p>The file <code class="docutils literal notranslate"><span class="pre">packages/rank1_cuts/coefficient_getter/include/rank1_coefficient_controller.hpp</span></code> defines the <code class="docutils literal notranslate"><span class="pre">Rank1CoefficientGetter</span></code> class, which is responsible for calculating the coefficients of Rank-1 cuts within the RouteOpt software package. This class provides methods to compute these coefficients based on column sequence information and solver data (LP model), supporting both full memory and limited memory approaches.</p>
+<h3 id="license">License<a class="headerlink" href="#license" title="Link to this heading">¶</a></h3>
+<p>This software is licensed under <strong>GPL-3.0</strong>.</p>
+<h3 id="file-contents">File Contents<a class="headerlink" href="#file-contents" title="Link to this heading">¶</a></h3>
+<p>The header file <code class="docutils literal notranslate"><span class="pre">rank1_coefficient_controller.hpp</span></code> includes:</p>
+<ul class="simple">
+<li><p><strong>Rank1CoefficientGetter Class</strong></p>
+<ul>
+<li><p><em>Public Methods</em>:
+- <code class="docutils literal notranslate"><span class="pre">getR1CCoeffs</span></code>: Computes the coefficients of Rank-1 cuts.
+- <code class="docutils literal notranslate"><span class="pre">buildR1CEnuMatrix</span></code>: Builds the enumeration matrix for Rank-1 cuts.</p></li>
+<li><p><em>Private Methods</em>:
+- <code class="docutils literal notranslate"><span class="pre">getFullMemR1CCoeffs</span></code>: Computes full memory coefficients of Rank-1 cuts.
+- <code class="docutils literal notranslate"><span class="pre">getCoefficientExtendR1C</span></code>: Extends the coefficient states for Rank-1 cuts.
+- <code class="docutils literal notranslate"><span class="pre">getLimitedR1CCoeffs</span></code>: Computes limited memory coefficients of Rank-1 cuts.
+- <code class="docutils literal notranslate"><span class="pre">getLimitedR1CPre</span></code>: Prepares internal data structures for limited memory Rank-1 cut coefficient computation.</p></li>
+</ul>
+</li>
+</ul>
+<h2 id="rank1coefficientgetter-class">Rank1CoefficientGetter Class<a class="headerlink" href="#rank1coefficientgetter-class" title="Link to this heading">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">Rank1CoefficientGetter</span></code> class is designed to calculate the coefficients of Rank-1 cuts. It utilizes both full memory and limited memory approaches to accommodate different computational scenarios.</p>
+<h3 id="constructor">Constructor<a class="headerlink" href="#constructor" title="Link to this heading">¶</a></h3>
+<ul>
+<li><p><strong>Rank1CoefficientGetter</strong></p>
+<p><em>Input</em>: A reference to the shared Rank-1 cuts data object of type <code class="docutils literal notranslate"><span class="pre">Rank1CutsDataShared</span></code>.</p>
+<p><strong>Meaning</strong>: Initializes the coefficient getter with shared data necessary for computing Rank-1 cut coefficients.</p>
+</li>
+</ul>
+<h3 id="public-methods">Public Methods<a class="headerlink" href="#public-methods" title="Link to this heading">¶</a></h3>
+<ul>
+<li><p><strong>getR1CCoeffs</strong></p>
+<p><em>Template Parameter</em>: <code class="docutils literal notranslate"><span class="pre">MatrixType</span></code> – The type of the matrix to store the coefficients.</p>
+<dl class="simple">
+<dt><em>Inputs</em>:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">seq_info</span></code>: A vector of <code class="docutils literal notranslate"><span class="pre">SequenceInfo</span></code> objects representing sequence data.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cuts</span></code>: A vector of Rank-1 cuts.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">solver</span></code>: A pointer to the <code class="docutils literal notranslate"><span class="pre">Solver</span></code> instance.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">if_limit_mem</span></code>: A boolean flag indicating whether to use the limited memory approach.</p></li>
+</ul>
+</dd>
+</dl>
+<p><em>Output</em>: <code class="docutils literal notranslate"><span class="pre">mat</span></code> – A matrix of type <code class="docutils literal notranslate"><span class="pre">MatrixType</span></code> to store the computed coefficients.</p>
+<p><strong>Meaning</strong>: This templated method calculates the coefficients of Rank-1 cuts based on the provided sequence information, cuts, solver data, and memory limitation flag. The results are stored in the provided matrix.</p>
+<div class="note admonition">
+<p class="admonition-title">Note</p>
+<p><cite>solver</cite> pointer is only used when <cite>if_limit_mem</cite> is false and can be <cite>nullptr</cite>. Then column sequence information is used to compute the coefficients.</p>
+</div>
+</li>
+<li><p><strong>buildR1CEnuMatrix</strong></p>
+<dl class="simple">
+<dt><em>Inputs</em>:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">mat</span></code>: A sparse matrix representing the coefficients.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">r1cs</span></code>: A vector of Rank-1 cuts.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">start</span></code>: An integer representing the starting row index in the LP model for processing.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">triplets</span></code>: A vector of <code class="docutils literal notranslate"><span class="pre">Eigen::Triplet</span></code> to store the non-zero entries.</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Meaning</strong>: This method constructs the enumeration matrix for Rank-1 cuts based on the provided sparse matrix, cuts, starting index, and triplets.</p>
+<div class="note admonition">
+<p class="admonition-title">Note</p>
+<p>retrieved <cite>triplets</cite>’s row index is the row index of the LP model - <cite>start</cite>.</p>
+</div>
+</li>
+</ul>
+<h3 id="private-methods">Private Methods<a class="headerlink" href="#private-methods" title="Link to this heading">¶</a></h3>
+<ul>
+<li><p><strong>getFullMemR1CCoeffs</strong></p>
+<p><em>Template Parameter</em>: <code class="docutils literal notranslate"><span class="pre">MatrixType</span></code> – The type of the matrix to store the coefficients.</p>
+<dl class="simple">
+<dt><em>Inputs</em>:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">seq_info</span></code>: A vector of <code class="docutils literal notranslate"><span class="pre">SequenceInfo</span></code> objects representing sequence data.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cuts</span></code>: A vector of Rank-1 cuts.</p></li>
+</ul>
+</dd>
+</dl>
+<p><em>Output</em>: <code class="docutils literal notranslate"><span class="pre">mat</span></code> – A matrix of type <code class="docutils literal notranslate"><span class="pre">MatrixType</span></code> to store the computed coefficients.</p>
+<p><strong>Meaning</strong>: This templated method calculates the coefficients of Rank-1 cuts using the full memory approach based on the provided sequence information, cuts, and matrix.</p>
+</li>
+<li><p><strong>getCoefficientExtendR1C</strong></p>
+<dl class="simple">
+<dt><em>Inputs</em>:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">states</span></code>: A vector representing the current states.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sparse_rep</span></code>: A vector representing the sparse representation.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cnt</span></code>: An unordered map counting occurrences of each state.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">valid_sparse_num</span></code>: An integer reference to the number of valid sparse entries.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">from</span></code>: An integer representing the starting customer index.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">to</span></code>: An integer representing the ending customer index.</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Meaning</strong>: This method updates the states, sparse representation, count map, and valid sparse number based on the transition from one customer to another.</p>
+</li>
+<li><p><strong>getLimitedR1CCoeffs</strong></p>
+<p><em>Template Parameter</em>: <code class="docutils literal notranslate"><span class="pre">MatrixType</span></code> – The type of the matrix to store the coefficients.</p>
+<p><em>Input</em>: <code class="docutils literal notranslate"><span class="pre">seq_info</span></code> – A vector of <code class="docutils literal notranslate"><span class="pre">SequenceInfo</span></code> objects representing sequence data.</p>
+<p><em>Output</em>: <code class="docutils literal notranslate"><span class="pre">mat</span></code> – A matrix of type <code class="docutils literal notranslate"><span class="pre">MatrixType</span></code> to store the computed coefficients.</p>
+<p><strong>Meaning</strong>: This templated method calculates the coefficients of Rank-1 cuts using the limited memory approach based on the provided sequence information and matrix.</p>
+</li>
+<li><p><strong>getLimitedR1CPre</strong></p>
+<p><em>Input</em>: <code class="docutils literal notranslate"><span class="pre">cuts</span></code> – A vector of Rank-1 cuts to be processed.</p>
+<p><strong>Meaning</strong>: This method initializes and sets up the necessary internal data structures to facilitate the computation of Rank-1 cut coefficients in a limited memory environment. It processes the provided cuts to extract and organize information required for efficient coefficient calculation.</p>
+</li>
+</ul>
+<h2 id="header-code">Header Code<a class="headerlink" href="#header-code" title="Link to this heading">¶</a></h2>
+<p>Below is an excerpt from <code class="docutils literal notranslate"><span class="pre">rank1_coefficient_controller.hpp</span></code> that illustrates the definition of the <code class="docutils literal notranslate"><span class="pre">Rank1CoefficientGetter</span></code> class:</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption highlight"><span class="filename"><span class="caption-text">
+</span>rank1_coefficient_controller.hpp<a class="headerlink" href="#id1" title="Permalink to this code">¶</a></span></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span class="cm">/*</span>
+<span class="cm"> * Copyright (c) 2025 Zhengzhong (Ricky) You.</span>
+<span class="cm"> * All rights reserved.</span>
+<span class="cm"> * Software: RouteOpt</span>
+<span class="cm"> * License: GPL-3.0</span>
+<span class="cm"> *</span>
+<span class="cm"> * @file rank1_coefficient_controller.hpp</span>
+<span class="cm"> * @brief Rank-1 Coefficient Getter for calculating coefficients of Rank-1 cuts.</span>
+<span class="cm"> *</span>
+<span class="cm"> * This header defines the Rank1CoefficientGetter class, which provides methods to</span>
+<span class="cm"> * compute the coefficients of Rank-1 cuts in the context of sequence information</span>
+<span class="cm"> * and solver data. It supports both full memory and limited memory approaches</span>
+<span class="cm"> * for coefficient calculation.</span>
+<span class="cm"> */</span>
+
+<span class="cp">#ifndef ROUTE_OPT_RANK1_COEFFICIENT_CONTROLLER_HPP</span>
+<span class="cp">#define ROUTE_OPT_RANK1_COEFFICIENT_CONTROLLER_HPP</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unordered_map&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Eigen/Sparse&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;rank1_macro.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;route_opt_macro.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;solver.hpp&quot;</span>
+
+<span class="k">namespace</span><span class="w"> </span><span class="nn">RouteOpt</span><span class="o">::</span><span class="nn">Rank1Cuts</span><span class="o">::</span><span class="nn">CoefficientGetter</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">class</span><span class="w"> </span><span class="nc">Rank1CoefficientGetter</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="o">:</span>
+<span class="w">        </span><span class="k">explicit</span><span class="w"> </span><span class="n">Rank1CoefficientGetter</span><span class="p">(</span><span class="n">Rank1CutsDataShared</span><span class="w"> </span><span class="o">&amp;</span><span class="n">data_shared</span><span class="p">)</span>
+<span class="w">            </span><span class="o">:</span><span class="w"> </span><span class="n">data_shared_ref</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ref</span><span class="p">(</span><span class="n">data_shared</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">MatrixType</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="n">getR1CCoeffs</span><span class="p">(</span>
+<span class="w">            </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">SequenceInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">seq_info</span><span class="p">,</span>
+<span class="w">            </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">R1c</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">cuts</span><span class="p">,</span>
+<span class="w">            </span><span class="k">const</span><span class="w"> </span><span class="n">Solver</span><span class="w"> </span><span class="o">*</span><span class="n">solver</span><span class="p">,</span>
+<span class="w">            </span><span class="kt">bool</span><span class="w"> </span><span class="n">if_limit_mem</span><span class="p">,</span>
+<span class="w">            </span><span class="n">MatrixType</span><span class="w"> </span><span class="o">&amp;</span><span class="n">mat</span><span class="p">);</span>
+
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="nf">buildR1CEnuMatrix</span><span class="p">(</span>
+<span class="w">            </span><span class="k">const</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">SparseMatrix</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">RowMajor</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">mat</span><span class="p">,</span>
+<span class="w">            </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">R1c</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">r1cs</span><span class="p">,</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">start</span><span class="p">,</span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Eigen</span><span class="o">::</span><span class="n">Triplet</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">triplets</span>
+<span class="w">        </span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="nf">recoverR1CsInEnum</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">R1c</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">r1cs</span><span class="p">,</span>
+<span class="w">                            </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">SequenceInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">cols</span><span class="p">,</span>
+<span class="w">                            </span><span class="n">Solver</span><span class="w"> </span><span class="o">&amp;</span><span class="n">solver</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">Rank1CoefficientGetter</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">delete</span><span class="p">;</span>
+<span class="w">        </span><span class="o">~</span><span class="n">Rank1CoefficientGetter</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">private</span><span class="o">:</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">r1cIndex</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">lp_v_cut_map</span><span class="p">{};</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">lp_v_v_use_states</span><span class="p">{};</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">lp_r1c_denominator</span><span class="p">{};</span>
+
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">reference_wrapper</span><span class="o">&lt;</span><span class="n">Rank1CutsDataShared</span><span class="o">&gt;</span><span class="w"> </span><span class="n">data_shared_ref</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">MatrixType</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="n">getFullMemR1CCoeffs</span><span class="p">(</span>
+<span class="w">            </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">SequenceInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">seq_info</span><span class="p">,</span>
+<span class="w">            </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">R1c</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">cuts</span><span class="p">,</span>
+<span class="w">            </span><span class="n">MatrixType</span><span class="w"> </span><span class="o">&amp;</span><span class="n">mat</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">MatrixType</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="n">getFullMemR1CCoeffs</span><span class="p">(</span>
+<span class="w">            </span><span class="k">const</span><span class="w"> </span><span class="n">Solver</span><span class="w"> </span><span class="o">*</span><span class="n">solver</span><span class="p">,</span>
+<span class="w">            </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">R1c</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">cuts</span><span class="p">,</span>
+<span class="w">            </span><span class="n">MatrixType</span><span class="w"> </span><span class="o">&amp;</span><span class="n">mat</span><span class="p">);</span>
+
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="nf">getCoefficientExtendR1C</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">states</span><span class="p">,</span>
+<span class="w">                                     </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">sparse_rep</span><span class="p">,</span>
+<span class="w">                                     </span><span class="n">std</span><span class="o">::</span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">cnt</span><span class="p">,</span>
+<span class="w">                                     </span><span class="kt">int</span><span class="w"> </span><span class="o">&amp;</span><span class="n">valid_sparse_num</span><span class="p">,</span>
+<span class="w">                                     </span><span class="kt">int</span><span class="w"> </span><span class="n">from</span><span class="p">,</span>
+<span class="w">                                     </span><span class="kt">int</span><span class="w"> </span><span class="n">to</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">MatrixType</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="n">getLimitedR1CCoeffs</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">SequenceInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">seq_info</span><span class="p">,</span>
+<span class="w">                                 </span><span class="n">MatrixType</span><span class="w"> </span><span class="o">&amp;</span><span class="n">mat</span><span class="p">);</span>
+
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="nf">getLimitedR1CPre</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">R1c</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">cuts</span><span class="p">);</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="p">}</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;r1c_coeffs_getter.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;full_r1c_coeffs_getter.hpp&quot;</span>
+<span class="cp">#endif </span><span class="c1">// ROUTE_OPT_RANK1_COEFFICIENT_CONTROLLER_HPP</span>
+</code></pre></div>
+</div>
+</div>
+<h2 id="usage-example">Usage Example<a class="headerlink" href="#usage-example" title="Link to this heading">¶</a></h2>
+<p>Below is an example demonstrating how to use the <code class="docutils literal notranslate"><span class="pre">Rank1CoefficientGetter</span></code> class to compute the coefficients of Rank-1 cuts using a limited memory approach.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;rank1_coefficient_controller.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;solver.hpp&quot;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">RouteOpt</span><span class="o">::</span><span class="nn">Rank1Cuts</span><span class="o">::</span><span class="nn">CoefficientGetter</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Initialize shared Rank-1 cuts data with an instance dimension (e.g., 4)</span>
+<span class="w">    </span><span class="n">Rank1CutsDataShared</span><span class="w"> </span><span class="n">sharedData</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Create an instance of the Rank1CoefficientGetter with the shared data</span>
+<span class="w">    </span><span class="n">Rank1CoefficientGetter</span><span class="w"> </span><span class="n">coeffGetter</span><span class="p">(</span><span class="n">sharedData</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Prepare dummy sequence information</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">SequenceInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">seqInfo</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// Populate seqInfo with relevant data...</span>
+
+<span class="w">    </span><span class="c1">// Define a matrix type (for example, using Eigen&#39;s SparseMatrix)</span>
+<span class="w">    </span><span class="n">Eigen</span><span class="o">::</span><span class="n">SparseMatrix</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">RowMajor</span><span class="o">&gt;</span><span class="w"> </span><span class="n">coeffMatrix</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Compute the coefficients using the limited memory approach</span>
+<span class="w">    </span><span class="n">coeffGetter</span><span class="p">.</span><span class="n">getR1CCoeffs</span><span class="p">(</span><span class="n">seqInfo</span><span class="p">,</span><span class="w"> </span><span class="cm">/*cuts=*/</span><span class="p">{},</span><span class="w"> </span><span class="cm">/*solver=*/</span><span class="k">nullptr</span><span class="p">,</span><span class="w"> </span><span class="cm">/*if_limit_mem=*/</span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="n">coeffMatrix</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Output the number of non-zero entries in the coefficient matrix (for demonstration)</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Computed coefficients matrix has &quot;</span>
+<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">coeffMatrix</span><span class="p">.</span><span class="n">nonZeros</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; non-zero entries.&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<h2 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">Rank1CoefficientGetter</span></code> module in RouteOpt is essential for calculating the coefficients of Rank-1 cuts. It offers flexible methods for coefficient computation under both full and limited memory scenarios, enabling efficient integration of Rank-1 cuts into optimization models.</p>
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="update_reduced_cost.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: R1Cs: RC Updater" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              R1Cs: RC Updater
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../rounded_cap_cuts/rcc_index.html" class="md-footer__link md-footer__link--next" aria-label="Next: Rounded Capacity Cuts" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Rounded Capacity Cuts
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  
+  
+  <div class="md-footer-meta md-typeset">
+    
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-footer-copyright__highlight">
+        &#169; Copyright 2025, Zhengzhong (Ricky) You.
+        
+    </div>
+  
+    Created using
+    <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
+    7.4.7.
+     and
+    <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
+  
+</div>
+      
+    </div>
+    
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand", "navigation.top"], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+      
+        <script src="../_static/sphinx_immaterial_theme.f9d9eeeb247ace16c.min.js?v=8ec58cb5"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+  </body>
+</html>

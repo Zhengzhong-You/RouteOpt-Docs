@@ -1,0 +1,1257 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="">
+    
+    
+      
+        <title>R1Cs: Separation - RouteOpt  documentation</title>
+      
+    
+    
+      
+        
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+        <link rel="stylesheet" type="text/css" href="../_static/sphinx_immaterial_theme.02cb18745d09eea51.min.css?v=ff456132" />
+        <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+        <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=ae161c19" />
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="blue">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#overview" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="RouteOpt  documentation" class="md-header__button md-logo" aria-label="RouteOpt  documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            RouteOpt  documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              R1Cs: Separation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="green" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9v1Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Zhengzhong-You/RouteOpt" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    RouteOpt
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="RouteOpt  documentation" class="md-nav__button md-logo" aria-label="RouteOpt  documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+    </a>
+    RouteOpt  documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Zhengzhong-You/RouteOpt" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    RouteOpt
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get_started/start_index.html" class="md-nav__link">
+        <span title="/get_started/start_index.rst (reference label)" class="md-ellipsis">Get Started</span>
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../common/config.html" class="md-nav__link">
+        <span title="/common/config.rst (reference label)" class="md-ellipsis">Route<wbr>Opt Core Macros, Constants, and Utilities</span>
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../common/solver.html" class="md-nav__link">
+        <span title="/common/solver.rst (reference label)" class="md-ellipsis">Solver Interface</span>
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="r1c_index.html"><span title="/rank1_cuts/r1c_index.rst (reference label)" class="md-ellipsis">Rank-<wbr>1 Cuts</span></a>
+          
+            <label for="__nav_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="Rank-1 Cuts" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          <span title="/rank1_cuts/r1c_index.rst (reference label)" class="md-ellipsis">Rank-<wbr>1 Cuts</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="rank1_common.html" class="md-nav__link">
+        <span title="/rank1_cuts/rank1_common.rst (reference label)" class="md-ellipsis">R1Cs:<wbr> Common Header</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          <span title="/rank1_cuts/separation.rst (reference label)" class="md-ellipsis">R1Cs:<wbr> Separation</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="#" class="md-nav__link md-nav__link--active">
+        <span title="/rank1_cuts/separation.rst (reference label)" class="md-ellipsis">R1Cs:<wbr> Separation</span>
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span title="/rank1_cuts/separation.rst#overview (reference label)" class="md-ellipsis">Overview</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#license" class="md-nav__link">
+    <span title="/rank1_cuts/separation.rst#license (reference label)" class="md-ellipsis">License</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-contents" class="md-nav__link">
+    <span title="/rank1_cuts/separation.rst#file-contents (reference label)" class="md-ellipsis">File Contents</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#macro-definitions-and-type-aliases" class="md-nav__link">
+    <span title="/rank1_cuts/separation.rst#macro-definitions-and-type-aliases (reference label)" class="md-ellipsis">Macro Definitions and Type Aliases</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#separation-controller-rank1separationcontroller" class="md-nav__link">
+    <span title="/rank1_cuts/separation.rst#separation-controller-rank1separationcontroller (reference label)" class="md-ellipsis">Separation Controller:<wbr> Rank1Separation<wbr>Controller</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Separation Controller: Rank1SeparationController">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constructor" class="md-nav__link">
+    <span title="/rank1_cuts/separation.rst#constructor (reference label)" class="md-ellipsis">Constructor</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#updateinfo" class="md-nav__link">
+    <span title="/rank1_cuts/separation.rst#updateinfo (reference label)" class="md-ellipsis">update<wbr>Info<wbr>()</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#separaterank1cuts" class="md-nav__link">
+    <span title="/rank1_cuts/separation.rst#separaterank1cuts (reference label)" class="md-ellipsis">separate<wbr>Rank1Cuts<wbr>()</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#convert2arcmemory" class="md-nav__link">
+    <span title="/rank1_cuts/separation.rst#convert2arcmemory (reference label)" class="md-ellipsis">convert2Arc<wbr>Memory<wbr>()</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getifonceusenosymmetrymem" class="md-nav__link">
+    <span title="/rank1_cuts/separation.rst#getifonceusenosymmetrymem (reference label)" class="md-ellipsis">get<wbr>If<wbr>Once<wbr>Use<wbr>No<wbr>Symmetry<wbr>Mem<wbr>()</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#header-codes" class="md-nav__link">
+    <span title="/rank1_cuts/separation.rst#header-codes (reference label)" class="md-ellipsis">Header Codes</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage-example" class="md-nav__link">
+    <span title="/rank1_cuts/separation.rst#usage-example (reference label)" class="md-ellipsis">Usage Example</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span title="/rank1_cuts/separation.rst#conclusion (reference label)" class="md-ellipsis">Conclusion</span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="update_reduced_cost.html" class="md-nav__link">
+        <span title="/rank1_cuts/update_reduced_cost.rst (reference label)" class="md-ellipsis">R1Cs:<wbr> RC Updater</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="calculate_coefficients.html" class="md-nav__link">
+        <span title="/rank1_cuts/calculate_coefficients.rst (reference label)" class="md-ellipsis">R1Cs:<wbr> Coefficient Getter</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rounded_cap_cuts/rcc_index.html" class="md-nav__link">
+        <span title="/rounded_cap_cuts/rcc_index.rst (reference label)" class="md-ellipsis">Rounded Capacity Cuts</span>
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../branching/branching_index.html" class="md-nav__link">
+        <span title="/branching/branching_index.rst (reference label)" class="md-ellipsis">Branching</span>
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deluxing/deluxing_index.html" class="md-nav__link">
+        <span title="/deluxing/deluxing_index.rst (reference label)" class="md-ellipsis">De<wbr>Luxing</span>
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span title="/rank1_cuts/separation.rst#overview (reference label)" class="md-ellipsis">Overview</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#license" class="md-nav__link">
+    <span title="/rank1_cuts/separation.rst#license (reference label)" class="md-ellipsis">License</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-contents" class="md-nav__link">
+    <span title="/rank1_cuts/separation.rst#file-contents (reference label)" class="md-ellipsis">File Contents</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#macro-definitions-and-type-aliases" class="md-nav__link">
+    <span title="/rank1_cuts/separation.rst#macro-definitions-and-type-aliases (reference label)" class="md-ellipsis">Macro Definitions and Type Aliases</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#separation-controller-rank1separationcontroller" class="md-nav__link">
+    <span title="/rank1_cuts/separation.rst#separation-controller-rank1separationcontroller (reference label)" class="md-ellipsis">Separation Controller:<wbr> Rank1Separation<wbr>Controller</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Separation Controller: Rank1SeparationController">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constructor" class="md-nav__link">
+    <span title="/rank1_cuts/separation.rst#constructor (reference label)" class="md-ellipsis">Constructor</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#updateinfo" class="md-nav__link">
+    <span title="/rank1_cuts/separation.rst#updateinfo (reference label)" class="md-ellipsis">update<wbr>Info<wbr>()</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#separaterank1cuts" class="md-nav__link">
+    <span title="/rank1_cuts/separation.rst#separaterank1cuts (reference label)" class="md-ellipsis">separate<wbr>Rank1Cuts<wbr>()</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#convert2arcmemory" class="md-nav__link">
+    <span title="/rank1_cuts/separation.rst#convert2arcmemory (reference label)" class="md-ellipsis">convert2Arc<wbr>Memory<wbr>()</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getifonceusenosymmetrymem" class="md-nav__link">
+    <span title="/rank1_cuts/separation.rst#getifonceusenosymmetrymem (reference label)" class="md-ellipsis">get<wbr>If<wbr>Once<wbr>Use<wbr>No<wbr>Symmetry<wbr>Mem<wbr>()</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#header-codes" class="md-nav__link">
+    <span title="/rank1_cuts/separation.rst#header-codes (reference label)" class="md-ellipsis">Header Codes</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage-example" class="md-nav__link">
+    <span title="/rank1_cuts/separation.rst#usage-example (reference label)" class="md-ellipsis">Usage Example</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span title="/rank1_cuts/separation.rst#conclusion (reference label)" class="md-ellipsis">Conclusion</span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset" role="main">
+                  
+
+
+<h1 id="r1cs-separation">R1Cs: Separation<a class="headerlink" href="#r1cs-separation" title="Link to this heading">¶</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
+<p>The files <code class="docutils literal notranslate"><span class="pre">packages/rank1_cuts/separation/include/rank1_separation_macro.hpp</span></code> and <code class="docutils literal notranslate"><span class="pre">packages/rank1_cuts/separation/include/rank1_separation_controller.hpp</span></code> define the macro definitions, type aliases, and the controller class used for the separation of Rank-1 cuts within the RouteOpt software package. These files provide the parameters for tolerances, memory settings, and generator parameters, as well as the implementation of the Rank-1 separation controller which integrates cut generation, memory finding, and cut selection modules.</p>
+<h3 id="license">License<a class="headerlink" href="#license" title="Link to this heading">¶</a></h3>
+<p>This software is licensed under <strong>GPL-3.0</strong>.</p>
+<h3 id="file-contents">File Contents<a class="headerlink" href="#file-contents" title="Link to this heading">¶</a></h3>
+<p>The separation module is composed of two main components:</p>
+<ul>
+<li><p><strong>Macro Definitions and Type Aliases</strong></p>
+<p>The file <code class="docutils literal notranslate"><span class="pre">rank1_separation_macro.hpp</span></code> defines constants, type aliases, and helper macros used in the Rank-1 separation process.</p>
+</li>
+<li><p><strong>Separation Controller</strong></p>
+<p>The file <code class="docutils literal notranslate"><span class="pre">rank1_separation_controller.hpp</span></code> defines the <code class="docutils literal notranslate"><span class="pre">Rank1SeparationController</span></code> class, which manages the separation process for Rank-1 cuts.</p>
+</li>
+</ul>
+<h2 id="macro-definitions-and-type-aliases">Macro Definitions and Type Aliases<a class="headerlink" href="#macro-definitions-and-type-aliases" title="Link to this heading">¶</a></h2>
+<p>The file <code class="docutils literal notranslate"><span class="pre">rank1_separation_macro.hpp</span></code> provides several key definitions:</p>
+<ul>
+<li><p><strong>RANK1_SEPARATION_VERBOSE</strong></p>
+<p>Verbosity flag for debugging the separation process.</p>
+</li>
+<li><p><strong>SOL_X_RANK1_TOLERANCE</strong></p>
+<p>Tolerance for solution x values in Rank-1 separation.</p>
+</li>
+<li><p><strong>MAX_CUT_MEM_FACTOR</strong></p>
+<p>Factor to control the maximum memory size for cut generation.</p>
+</li>
+<li><p><strong>INITIAL_RANK_1_MULTI_LABEL_POOL_SIZE</strong></p>
+<p>Initial size for the pool of Rank-1 multi-labels.</p>
+</li>
+<li><p><strong>FIND_MEM_USE_ENUMERATION_OR_MIP</strong></p>
+<p>Threshold to decide whether to use enumeration or MIP (Mixed-Integer Programming) for memory finding.</p>
+</li>
+<li><p><strong>MAX_NUMBER_SEGMENT_FOR_ONE_COLUMN</strong></p>
+<p>Maximum number of segments allowed for a single column in the separation process.</p>
+</li>
+<li><p><strong>MAX_UNDETERMINED_ARC_NUMBER</strong></p>
+<p>Maximum number of undetermined arcs.</p>
+</li>
+<li><p><strong>MAX_LABELS</strong></p>
+<p>Maximum number of labels allowed.</p>
+</li>
+<li><p><strong>MAX_HEURISTIC_SEP_ROW_RANK1</strong></p>
+<p>Maximum number of neighbor customers for separating Rank-1 cuts.</p>
+</li>
+<li><p><strong>MIN_CUTS_ADDED_PER_ROUND</strong></p>
+<p>Minimum number of cuts to be added per separation round.</p>
+</li>
+<li><p><strong>TIME_LIMIT_FOR_MIP_FIND_MEM</strong></p>
+<p>Time limit (in seconds) for MIP-based memory finding.</p>
+</li>
+<li><p><strong>CUT_VIO_FACTOR</strong></p>
+<p>Violation factor for cuts.</p>
+</li>
+<li><p><strong>RANK1_ROW_DENSITY</strong></p>
+<p>Estimated density for Rank-1 cuts.</p>
+</li>
+<li><p><strong>SOL_KEEPER_LIMIT</strong></p>
+<p>Limit for keeping solution routes in memory.</p>
+</li>
+<li><p><strong>MemoryType</strong></p>
+<p>Enumeration specifying the memory mode used in separation:</p>
+<ul>
+<li><p><strong>NO_MEMORY</strong></p>
+<p>No memory is used.</p>
+</li>
+<li><p><strong>NODE_MEMORY</strong></p>
+<p>Node-based memory is applied.</p>
+</li>
+<li><p><strong>ARC_MEMORY</strong></p>
+<p>Arc-based memory is applied.</p>
+</li>
+</ul>
+</li>
+<li><p><strong>VectorHashInRank1</strong></p>
+<p>Custom hash functor for a vector of integers, used in unordered containers.</p>
+</li>
+<li><p><strong>arcBit</strong></p>
+<p>A bitset type representing undetermined arcs.</p>
+</li>
+<li><p><strong>cutLong</strong></p>
+<p>Alias for the custom long bitset type used in cut representations.</p>
+</li>
+<li><p><strong>sparseRowMatrixXI</strong> and <strong>sparseRowVectorXI</strong></p>
+<p>Type aliases for row-major sparse matrices and vectors using the Eigen library.</p>
+</li>
+<li><p><strong>RouteInfo</strong></p>
+<p>Structure containing route information, including:</p>
+<ul>
+<li><p><strong>frac_x</strong></p>
+<p>The fractional value associated with the route (e.g., LP solution value).</p>
+</li>
+<li><p><strong>col_seq</strong></p>
+<p>The sequence of customer indices representing the route.</p>
+</li>
+<li><p><strong>forward_concatenate_pos</strong></p>
+<p>The position used for forward concatenation during route merging.</p>
+</li>
+</ul>
+</li>
+<li><p><strong>RANK1_VERBOSE_EXEC</strong></p>
+<p>Macro for conditionally executing a statement based on the verbosity flag.</p>
+</li>
+</ul>
+<h2 id="separation-controller-rank1separationcontroller">Separation Controller: Rank1SeparationController<a class="headerlink" href="#separation-controller-rank1separationcontroller" title="Link to this heading">¶</a></h2>
+<p>The file <code class="docutils literal notranslate"><span class="pre">rank1_separation_controller.hpp</span></code> defines the <code class="docutils literal notranslate"><span class="pre">Rank1SeparationController</span></code> class, which manages the separation of Rank-1 cuts. Key functionalities include:</p>
+<h3 id="constructor">Constructor<a class="headerlink" href="#constructor" title="Link to this heading">¶</a></h3>
+<ul>
+<li><p><strong>rank1CutsDataShared</strong></p>
+<p><em>Input</em>: A reference to a shared Rank-1 cuts data object of type <code class="docutils literal notranslate"><span class="pre">Rank1CutsDataShared</span></code>.</p>
+<p><strong>Meaning</strong>: Provides precomputed multipliers and metadata required for generating Rank-1 cuts.</p>
+</li>
+<li><p><strong>max_row_rank1</strong></p>
+<p><em>Input</em>: An integer representing the maximum row dimension for Rank-1 cuts.</p>
+<p><strong>Meaning</strong>: Limits the maximum size (or depth) of cuts based on the number of customers (<span class="math notranslate nohighlight">\(|C|\)</span>).</p>
+</li>
+<li><p><strong>max_num_r1c3_per_round</strong></p>
+<p><em>Input</em>: An integer specifying the maximum number of R1C cuts with dimension 3 to be generated per separation round.</p>
+<p><strong>Meaning</strong>: Restricts the number of specific types of cuts (dimension 3).</p>
+</li>
+<li><p><strong>max_num_r1c_per_round</strong></p>
+<p><em>Input</em>: An integer specifying the maximum number of Rank-1 cuts (with dimensions other than 3) to be generated per round.</p>
+<p><strong>Meaning</strong>: Ensures that the total number of generated cuts remains within a manageable limit.</p>
+</li>
+<li><p><strong>solver</strong></p>
+<p><em>Input</em>: A reference to the IP solver object.</p>
+<p><strong>Meaning</strong>: Provides access to the underlying solver to integrate new cuts into the LP/MIP model.</p>
+</li>
+<li><p><strong>cost_mat4_vertex</strong></p>
+<p><em>Input</em>: A two-dimensional vector of doubles representing the cost matrix for vertices.</p>
+<p><strong>Meaning</strong>: Used to evaluate the cost associated with transitions between vertices in the routing problem.</p>
+</li>
+</ul>
+<h3 id="updateinfo">updateInfo()<a class="headerlink" href="#updateinfo" title="Link to this heading">¶</a></h3>
+<ul>
+<li><p><strong>limited_memory_type</strong></p>
+<p><em>Input</em>: A value of the enumeration <code class="docutils literal notranslate"><span class="pre">MemoryType</span></code>.</p>
+<p><strong>Meaning</strong>: Determines the memory mode to apply during separation (e.g., NO_MEMORY, NODE_MEMORY, ARC_MEMORY).</p>
+</li>
+<li><p><strong>pricing_hard_level</strong></p>
+<p><em>Input</em>: A value of the enumeration <code class="docutils literal notranslate"><span class="pre">PRICING_HARD_LEVEL</span></code>.</p>
+<p><strong>Meaning</strong>: Indicates the complexity of the pricing subproblem, guiding the cut generation strategy.</p>
+</li>
+<li><p><strong>if_collect_sol</strong></p>
+<p><em>Input</em>: A boolean flag.</p>
+<p><strong>Meaning</strong>: Specifies whether the current solution routes should be collected for further processing or analysis.</p>
+</li>
+<li><p><strong>sol</strong></p>
+<p><em>Input</em>: A vector of <code class="docutils literal notranslate"><span class="pre">RouteInfo</span></code> structures.</p>
+<p><strong>Meaning</strong>: Represents the current solution routes obtained from the LP/MIP, each containing route details such as fractional value and customer sequence.</p>
+</li>
+<li><p><strong>old_cuts</strong></p>
+<p><em>Input</em>: A vector of existing Rank-1 cuts (<code class="docutils literal notranslate"><span class="pre">R1c</span></code> structures).</p>
+<p><strong>Meaning</strong>: Contains previously generated cuts that may be used for comparison or updating during the separation process.</p>
+</li>
+</ul>
+<h3 id="separaterank1cuts">separateRank1Cuts()<a class="headerlink" href="#separaterank1cuts" title="Link to this heading">¶</a></h3>
+<ul>
+<li><p><strong>cuts</strong></p>
+<p><em>Input/Output</em>: A vector of <code class="docutils literal notranslate"><span class="pre">R1c</span></code> structures.</p>
+<p><strong>Meaning</strong>: On input, may contain existing cuts; on output, will include newly generated or updated Rank-1 cuts.</p>
+</li>
+<li><p><strong>if_mem</strong></p>
+<p><em>Input</em>: A boolean flag.</p>
+<p><strong>Meaning</strong>: Indicates whether memory-based search strategies should be applied during the separation process.</p>
+<div class="note admonition">
+<p class="admonition-title">Note</p>
+<p>When call this function in <code class="docutils literal notranslate"><span class="pre">enumeration</span></code> state, <code class="docutils literal notranslate"><span class="pre">if_mem</span></code> should be set to <code class="docutils literal notranslate"><span class="pre">false</span></code> to avoid redundant memory search.</p>
+</div>
+</li>
+<li><p><strong>if_select_cuts</strong></p>
+<p><em>Input</em>: A boolean flag.</p>
+<p><strong>Meaning</strong>: Determines whether cut selection strategies should be executed to filter or prioritize generated cuts.</p>
+<div class="note admonition">
+<p class="admonition-title">Note</p>
+<p>When call this function <code class="docutils literal notranslate"><span class="pre">enumeration</span></code> state, <code class="docutils literal notranslate"><span class="pre">if_select_cuts</span></code> should be set to <code class="docutils literal notranslate"><span class="pre">false</span></code> to avoid giving up cuts
+that are bad for labeling but have no impact on the pricing problem in <code class="docutils literal notranslate"><span class="pre">enumeration</span></code> state, i.e., inspection algorithm.</p>
+</div>
+</li>
+</ul>
+<h3 id="convert2arcmemory">convert2ArcMemory()<a class="headerlink" href="#convert2arcmemory" title="Link to this heading">¶</a></h3>
+<ul>
+<li><p><strong>existing_cuts</strong></p>
+<p><em>Input/Output</em>: A vector of <code class="docutils literal notranslate"><span class="pre">R1c</span></code> structures.</p>
+<p><strong>Meaning</strong>: Contains cuts in a node-memory representation which will be converted to an arc-memory representation for improved pricing performance.</p>
+</li>
+</ul>
+<h3 id="getifonceusenosymmetrymem">getIfOnceUseNoSymmetryMem()<a class="headerlink" href="#getifonceusenosymmetrymem" title="Link to this heading">¶</a></h3>
+<ul>
+<li><p><strong>Return Value</strong></p>
+<p><em>Output</em>: A boolean flag.</p>
+<p><strong>Meaning</strong>: Indicates whether the “no symmetry memory” approach has been applied at least once. This flag is useful for diagnostic purposes.</p>
+</li>
+</ul>
+<div class="note admonition">
+<p class="admonition-title">Note</p>
+<p>When performing bi-directional labeling in non-symmetric problems, it is crucial to decide whether to change your resource meet point.</p>
+<p>If you have already employed the “no symmetry memory” (i.e., arc memory) and then change your resource meet point, an arc (e.g., 2→3) may be interpreted as 3→2 in your solution vector.</p>
+<p>Since 2→3 and 3→2 represent different memory arcs, this change will alter the column coefficients of the cut, typically resulting in a weaker cut compared to the original.</p>
+<p>Nevertheless, the cut remains valid.</p>
+</div>
+<h2 id="header-codes">Header Codes<a class="headerlink" href="#header-codes" title="Link to this heading">¶</a></h2>
+<p>Below is an excerpt from <code class="docutils literal notranslate"><span class="pre">rank1_separation_macro.hpp</span></code> that illustrates key macro definitions and type aliases:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span class="cm">/*</span>
+<span class="cm"> * Copyright (c) 2025 Zhengzhong (Ricky) You.</span>
+<span class="cm"> * All rights reserved.</span>
+<span class="cm"> * Software: RouteOpt</span>
+<span class="cm"> * License: GPL-3.0</span>
+<span class="cm"> */</span>
+
+<span class="cm">/*</span>
+<span class="cm"> * @file rank1_separation_macro.hpp</span>
+<span class="cm"> * @brief Macro definitions and type aliases for Rank-1 separation in RouteOpt.</span>
+<span class="cm"> *</span>
+<span class="cm"> * This header defines various constants, type aliases, and helper macros that are used</span>
+<span class="cm"> * in the Rank-1 separation process.</span>
+<span class="cm"> */</span>
+
+<span class="cp">#ifndef ROUTE_OPT_RANK1_SEPARATION_MACRO_HPP</span>
+<span class="cp">#define ROUTE_OPT_RANK1_SEPARATION_MACRO_HPP</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;bitset&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Eigen/Sparse&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;route_opt_macro.hpp&quot;</span>
+
+<span class="k">namespace</span><span class="w"> </span><span class="nn">RouteOpt</span><span class="o">::</span><span class="nn">Rank1Cuts</span><span class="o">::</span><span class="nn">Separation</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">RANK1_SEPARATION_VERBOSE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">SOL_X_RANK1_TOLERANCE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1e-3</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">MAX_CUT_MEM_FACTOR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.15</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">INITIAL_RANK_1_MULTI_LABEL_POOL_SIZE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2048</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">FIND_MEM_USE_ENUMERATION_OR_MIP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">MAX_NUMBER_SEGMENT_FOR_ONE_COLUMN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">16</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">MAX_UNDETERMINED_ARC_NUMBER</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">128</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">MAX_LABELS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1024</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">MAX_HEURISTIC_SEP_ROW_RANK1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">16</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">MIN_CUTS_ADDED_PER_ROUND</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">50</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">TIME_LIMIT_FOR_MIP_FIND_MEM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.2</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">CUT_VIO_FACTOR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.1</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">RANK1_ROW_DENSITY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.1</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">SOL_KEEPER_LIMIT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">enum</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MemoryType</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">NO_MEMORY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="n">NODE_MEMORY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">        </span><span class="n">ARC_MEMORY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">RouteInfo</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">frac_x</span><span class="p">{};</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">col_seq</span><span class="p">{};</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">forward_concatenate_pos</span><span class="p">{};</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">VectorHashInRank1</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">size_t</span><span class="w"> </span><span class="nf">operator</span><span class="p">()(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">v</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="kt">size_t</span><span class="w"> </span><span class="n">hash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">num</span><span class="o">:</span><span class="w"> </span><span class="n">v</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">hash</span><span class="w"> </span><span class="o">^=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">hash</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{}(</span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mh">0x9e3779b9</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">hash</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">6</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">hash</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">hash</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">arcBit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">bitset</span><span class="o">&lt;</span><span class="n">MAX_UNDETERMINED_ARC_NUMBER</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">cutLong</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">routeOptLong</span><span class="p">;</span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">sparseRowMatrixXI</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">SparseMatrix</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">RowMajor</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">sparseRowVectorXI</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">SparseVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">RowMajor</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="cp">#define RANK1_VERBOSE_EXEC(stmt) do { \</span>
+<span class="cp">    if (RANK1_SEPARATION_VERBOSE) { \</span>
+<span class="cp">        stmt; \</span>
+<span class="cp">    } \</span>
+<span class="cp">} while (0);</span>
+<span class="p">}</span><span class="w"> </span><span class="c1">// namespace RouteOpt::Rank1Cuts::Separation</span>
+
+<span class="cp">#endif </span><span class="c1">// ROUTE_OPT_RANK1_SEPARATION_MACRO_HPP</span>
+</code></pre></div>
+</div>
+<p>Below is an excerpt from <code class="docutils literal notranslate"><span class="pre">rank1_separation_controller.hpp</span></code> that demonstrates the interface of the separation controller:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span class="cm">/*</span>
+<span class="cm"> * Copyright (c) 2025 Zhengzhong (Ricky) You.</span>
+<span class="cm"> * All rights reserved.</span>
+<span class="cm"> * Software: RouteOpt</span>
+<span class="cm"> * License: GPL-3.0</span>
+<span class="cm"> *</span>
+<span class="cm"> * @file rank1_separation_controller.hpp</span>
+<span class="cm"> * @brief Rank-1 Separation Controller for handling the generation, updating, and processing of Rank-1 cuts.</span>
+<span class="cm"> *</span>
+<span class="cm"> * This header defines the Rank1SeparationController class which coordinates the separation process for Rank-1 cuts.</span>
+<span class="cm"> * It integrates shared Rank-1 cuts data, cut generation, memory finding, and cut selection modules,</span>
+<span class="cm"> * and interfaces with the underlying solver and vertex cost matrix.</span>
+<span class="cm"> */</span>
+
+<span class="cp">#ifndef ROUTE_OPT_RANK1_SEPARATION_CONTROLLER_HPP</span>
+<span class="cp">#define ROUTE_OPT_RANK1_SEPARATION_CONTROLLER_HPP</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;rank1_data_shared.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;rank1_cuts_generator.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;rank1_memory_finder.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;rank1_cuts_selector.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;solver.hpp&quot;</span>
+
+<span class="k">namespace</span><span class="w"> </span><span class="nn">RouteOpt</span><span class="o">::</span><span class="nn">Rank1Cuts</span><span class="o">::</span><span class="nn">Separation</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">class</span><span class="w"> </span><span class="nc">Rank1SeparationController</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="o">:</span>
+<span class="w">        </span><span class="n">Rank1SeparationController</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Rank1CutsDataShared</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rank1CutsDataShared</span><span class="p">,</span>
+<span class="w">                                  </span><span class="kt">int</span><span class="w"> </span><span class="n">max_row_rank1</span><span class="p">,</span>
+<span class="w">                                  </span><span class="kt">int</span><span class="w"> </span><span class="n">max_num_r1c3_per_round</span><span class="p">,</span>
+<span class="w">                                  </span><span class="kt">int</span><span class="w"> </span><span class="n">max_num_r1c_per_round</span><span class="p">,</span>
+<span class="w">                                  </span><span class="n">Solver</span><span class="w"> </span><span class="o">&amp;</span><span class="n">solver</span><span class="p">,</span>
+<span class="w">                                  </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">cost_mat4_vertex</span><span class="p">);</span>
+
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="nf">updateInfo</span><span class="p">(</span><span class="n">MemoryType</span><span class="w"> </span><span class="n">limited_memory_type</span><span class="p">,</span>
+<span class="w">                        </span><span class="n">PRICING_HARD_LEVEL</span><span class="w"> </span><span class="n">pricing_hard_level</span><span class="p">,</span>
+<span class="w">                        </span><span class="kt">bool</span><span class="w"> </span><span class="n">if_collect_sol</span><span class="p">,</span>
+<span class="w">                        </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">RouteInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">sol</span><span class="p">,</span>
+<span class="w">                        </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">R1c</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">old_cuts</span><span class="p">);</span>
+
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="nf">separateRank1Cuts</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">R1c</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">cuts</span><span class="p">,</span>
+<span class="w">                               </span><span class="kt">bool</span><span class="w"> </span><span class="n">if_mem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span>
+<span class="w">                               </span><span class="kt">bool</span><span class="w"> </span><span class="n">if_select_cuts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="nf">convert2ArcMemory</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">R1c</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">existing_cuts</span><span class="p">);</span>
+
+<span class="w">        </span><span class="p">[[</span><span class="n">nodiscard</span><span class="p">]]</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">getIfOnceUseNoSymmetryMem</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">if_once_use_no_symmetry_mem</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">Rank1SeparationController</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">delete</span><span class="p">;</span>
+<span class="w">        </span><span class="o">~</span><span class="n">Rank1SeparationController</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">private</span><span class="o">:</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">RouteInfo</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">sol_vec</span><span class="p">{};</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">reference_wrapper</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">Rank1CutsDataShared</span><span class="o">&gt;</span><span class="w"> </span><span class="n">rank1CutsDataShared_ref</span><span class="p">;</span>
+<span class="w">        </span><span class="n">DataShared</span><span class="w"> </span><span class="n">sharedData</span><span class="p">;</span>
+<span class="w">        </span><span class="n">CutGenerator</span><span class="w"> </span><span class="n">cutGen</span><span class="p">;</span>
+<span class="w">        </span><span class="n">MemGenerator</span><span class="w"> </span><span class="n">memGen</span><span class="p">;</span>
+<span class="w">        </span><span class="n">CutSelector</span><span class="w"> </span><span class="n">cutSelector</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">bool</span><span class="w"> </span><span class="n">if_once_use_no_symmetry_mem</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span>
+
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="nf">cleanData</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">sharedData</span><span class="p">.</span><span class="n">cleanData</span><span class="p">();</span>
+<span class="w">            </span><span class="n">cutGen</span><span class="p">.</span><span class="n">cleanData</span><span class="p">();</span>
+<span class="w">            </span><span class="n">memGen</span><span class="p">.</span><span class="n">cleanData</span><span class="p">();</span>
+<span class="w">            </span><span class="n">cutSelector</span><span class="p">.</span><span class="n">cleanData</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="nf">setRhs</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">R1c</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">cuts</span><span class="p">);</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="p">}</span><span class="w"> </span><span class="c1">// namespace RouteOpt::Rank1Cuts::Separation</span>
+
+<span class="cp">#endif </span><span class="c1">// ROUTE_OPT_RANK1_SEPARATION_CONTROLLER_HPP</span>
+</code></pre></div>
+</div>
+<h2 id="usage-example">Usage Example<a class="headerlink" href="#usage-example" title="Link to this heading">¶</a></h2>
+<p>Below is an example demonstrating how to use the Rank-1 separation module in RouteOpt. This example shows how to initialize the shared data,
+create a solver instance, define a cost matrix, and then use the Rank1SeparationController to update information and generate new Rank-1 cuts.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;rank1_data_shared.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;rank1_separation_controller.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;solver.hpp&quot;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">RouteOpt</span><span class="o">::</span><span class="nn">Rank1Cuts</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">RouteOpt</span><span class="o">::</span><span class="nn">Rank1Cuts</span><span class="o">::</span><span class="nn">Separation</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Initialize shared Rank-1 cuts data with an instance dimension (e.g., 4)</span>
+<span class="w">    </span><span class="n">Rank1CutsDataShared</span><span class="w"> </span><span class="n">sharedData</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Create an instance of the IP solver</span>
+<span class="w">    </span><span class="n">Solver</span><span class="w"> </span><span class="n">solver</span><span class="p">{};</span>
+
+<span class="w">    </span><span class="c1">// Define a sample cost matrix for vertices (e.g., for 4 vertices)</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">costMatrix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">{</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">10.0</span><span class="p">,</span><span class="w"> </span><span class="mf">20.0</span><span class="p">,</span><span class="w"> </span><span class="mf">30.0</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="mf">10.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">15.0</span><span class="p">,</span><span class="w"> </span><span class="mf">25.0</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="mf">20.0</span><span class="p">,</span><span class="w"> </span><span class="mf">15.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">35.0</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="mf">30.0</span><span class="p">,</span><span class="w"> </span><span class="mf">25.0</span><span class="p">,</span><span class="w"> </span><span class="mf">35.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="c1">// Instantiate the Rank1SeparationController with parameters:</span>
+<span class="w">    </span><span class="c1">// - max_row_rank1: Maximum Rank-1 row dimension (e.g., 4)</span>
+<span class="w">    </span><span class="c1">// - max_num_r1c3_per_round: Maximum number of R1C3 cuts per separation round (e.g., 50)</span>
+<span class="w">    </span><span class="c1">// - max_num_r1c_per_round: Maximum number of R1C cuts (dimension != 3) per round (e.g., 100)</span>
+<span class="w">    </span><span class="c1">// This is one time call</span>
+<span class="w">    </span><span class="n">Rank1SeparationController</span><span class="w"> </span><span class="n">separationController</span><span class="p">(</span>
+<span class="w">        </span><span class="n">sharedData</span><span class="p">,</span>
+<span class="w">        </span><span class="mi">4</span><span class="p">,</span>
+<span class="w">        </span><span class="mi">50</span><span class="p">,</span>
+<span class="w">        </span><span class="mi">100</span><span class="p">,</span>
+<span class="w">        </span><span class="n">solver</span><span class="p">,</span>
+<span class="w">        </span><span class="n">costMatrix</span>
+<span class="w">    </span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Prepare dummy solution routes (RouteInfo) for the update</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">RouteInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">solutionRoutes</span><span class="p">;</span>
+<span class="w">    </span><span class="n">RouteInfo</span><span class="w"> </span><span class="n">route</span><span class="p">;</span>
+<span class="w">    </span><span class="n">route</span><span class="p">.</span><span class="n">frac_x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.75</span><span class="p">;</span>
+<span class="w">    </span><span class="n">route</span><span class="p">.</span><span class="n">col_seq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">};</span>
+<span class="w">    </span><span class="n">route</span><span class="p">.</span><span class="n">forward_concatenate_pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="n">solutionRoutes</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">route</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Add other routes as needed...</span>
+
+<span class="w">    </span><span class="c1">// Prepare the cut vector for old cuts (if not have, give empty vector)</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">R1c</span><span class="o">&gt;</span><span class="w"> </span><span class="n">oldCuts</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Update the controller with the current solution and existing cuts.</span>
+<span class="w">    </span><span class="c1">// You need to call this function each cutting round</span>
+<span class="w">    </span><span class="n">separationController</span><span class="p">.</span><span class="n">updateInfo</span><span class="p">(</span>
+<span class="w">        </span><span class="n">MemoryType</span><span class="o">::</span><span class="n">NODE_MEMORY</span><span class="p">,</span><span class="w">   </span><span class="c1">// Using node-based memory</span>
+<span class="w">        </span><span class="n">PRICING_HARD_LEVEL</span><span class="o">::</span><span class="n">EASY</span><span class="p">,</span><span class="w">   </span><span class="c1">// Pricing difficulty level: EASY</span>
+<span class="w">        </span><span class="nb">true</span><span class="p">,</span><span class="w">                       </span><span class="c1">// Collect current solution</span>
+<span class="w">        </span><span class="n">solutionRoutes</span><span class="p">,</span>
+<span class="w">        </span><span class="n">oldCuts</span>
+<span class="w">    </span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Container to hold the new generated Rank-1 cuts</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">R1c</span><span class="o">&gt;</span><span class="w"> </span><span class="n">newCuts</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Perform the separation process to generate new cuts</span>
+<span class="w">    </span><span class="c1">// You need to call this function each cutting round</span>
+<span class="w">    </span><span class="n">separationController</span><span class="p">.</span><span class="n">separateRank1Cuts</span><span class="p">(</span><span class="n">newCuts</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Optionally, convert node-memory-based cuts to arc-memory-based cuts</span>
+<span class="w">    </span><span class="n">separationController</span><span class="p">.</span><span class="n">convert2ArcMemory</span><span class="p">(</span><span class="n">newCuts</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Output the number of new cuts generated (for demonstration)</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Number of new Rank-1 cuts generated: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">newCuts</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Note</p>
+<p>The new cuts obtained may contain some of the old cuts, but definitely with larger memory set, and thus,
+make the these old cuts no longer tight. Therefore, it is recommended to identify the duplicated cuts in old cuts set,
+and remove them from the old cuts set before/after you add new cuts to the LP model.</p>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Note</p>
+<p>The Rank-1 separation module offers a myriad of interesting and useful features that are not fully covered in this document.
+For a deeper understanding, I recommend exploring the function usages directly in the source code located under <code class="docutils literal notranslate"><span class="pre">packages/application/cvrp/src</span></code> using an IDE such as CLion.</p>
+<p>Reviewing the source code of the CVRP application related to the Rank-1 separation module will provide valuable insights into how to use these features effectively.</p>
+<p>If you have any questions, please feel free to contact me at <a class="reference external" href="mailto:you&#46;z&#37;&#52;&#48;ufl&#46;edu">you<span>&#46;</span>z<span>&#64;</span>ufl<span>&#46;</span>edu</a> or send your question in Group Chat.</p>
+</div>
+<h2 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">¶</a></h2>
+<p>The Rank-1 separation module in RouteOpt provides a robust framework for generating, updating, and managing Rank-1 cuts. By leveraging detailed macro definitions for parameter settings and a dedicated controller for the separation process, users can effectively integrate advanced cut separation strategies into their routing solvers.</p>
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="rank1_common.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: R1Cs: Common Header" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              R1Cs: Common Header
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="update_reduced_cost.html" class="md-footer__link md-footer__link--next" aria-label="Next: R1Cs: RC Updater" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              R1Cs: RC Updater
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  
+  
+  <div class="md-footer-meta md-typeset">
+    
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-footer-copyright__highlight">
+        &#169; Copyright 2025, Zhengzhong (Ricky) You.
+        
+    </div>
+  
+    Created using
+    <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
+    7.4.7.
+     and
+    <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
+  
+</div>
+      
+    </div>
+    
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand", "navigation.top"], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+      
+        <script src="../_static/sphinx_immaterial_theme.f9d9eeeb247ace16c.min.js?v=8ec58cb5"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script id="MathJax-script" src="../_static/mathjax/tex-mml-chtml.js?v=cadf963e"></script>
+    
+  </body>
+</html>
