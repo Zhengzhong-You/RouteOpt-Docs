@@ -1,23 +1,24 @@
 # Minimal Makefile for Sphinx documentation
-#
 
-# You can set these variables from the command line, and also
-# from the environment for the first two.
 SPHINXOPTS    ?=
 SPHINXBUILD   ?= sphinx-build
 SOURCEDIR     = source
 BUILDDIR      = docs
 
-# Default: print help
+.PHONY: help html clean
+
+# Show help message
 help:
 	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
-.PHONY: help html Makefile
-
-# Build the HTML site directly into docs/
+# Build HTML into docs/ and add .nojekyll
 html:
-	@$(SPHINXBUILD) -b html "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+	@echo "Building HTML into $(BUILDDIR)/ ..."
+	@$(SPHINXBUILD) -b html "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS)
+	@echo "Creating .nojekyll in $(BUILDDIR)/ ..."
+	@touch "$(BUILDDIR)/.nojekyll"
 
-# Catch-all: route any other make targets to Sphinx’s -M mode
-%: Makefile
-	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+# Remove generated files
+clean:
+	@echo "Removing $(BUILDDIR)/ ..."
+	@rm -rf "$(BUILDDIR)/"
