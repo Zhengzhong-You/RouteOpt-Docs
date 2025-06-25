@@ -10,18 +10,9 @@ In ``src/main/src/call_pricing.cpp``, locate the function:
 .. code-block:: cpp
 
     void CVRPSolver::callPricingAtBeg(BbNode *node) {
-        setEnv(node);
-        if constexpr (ml_type == ML_TYPE::ML_GET_DATA_1 || ml_type == ML_TYPE::ML_GET_DATA_2) {
-            GetTrainingData<BbNode, std::pair<int, int>, PairHasher>::checkIfStopGeneratingData(
-                node->getTreeSize(), node->refIfTerminate());
-            if (node->getIfTerminate()) return;
-        }
-        double eps;
-        callPricing(node, std::numeric_limits<float>::max(), eps);
-        if (node->getIfRootNode() && app_type == APPLICATION_TYPE::VRPTW)
-            augmentNGRound(node, pricing_controller.refNG());
+        // Original function code here
 
-        // Add the following line here to disable branching after root LP
+        // Add the following line at the end to disable branching after root LP
         node->refIfTerminate() = true;
     }
 
