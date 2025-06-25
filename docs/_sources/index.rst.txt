@@ -65,3 +65,4 @@ RouteOpt is committed to building on previous foundational work, driving advance
    rounded_cap_cuts/rcc_index
    branching/branching_index
    deluxing/deluxing_index
+   faq/faq
