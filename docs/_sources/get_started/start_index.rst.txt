@@ -13,7 +13,6 @@ In this section, you will find:
 
 - **Install**: Step-by-step instructions for installing RouteOpt.
 - **Help**: Comprehensive guides and troubleshooting tips.
-- **FAQ**: Answers to frequently asked questions.
 - **Cite**: Information on how to properly cite RouteOpt in your academic or professional work.
 
 We hope you find this documentation useful and that it helps you get started with RouteOpt quickly and efficiently.
@@ -24,5 +23,4 @@ Happy optimizing!
 
    install
    help
-   faq
    cite
