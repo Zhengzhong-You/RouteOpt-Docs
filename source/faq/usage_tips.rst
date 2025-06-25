@@ -3,8 +3,6 @@ Usage Tips
 
 This section provides useful tips and configurations for efficiently running and customizing RouteOpt, especially for CVRP and VRPTW applications.
 
-To solve only the root linear programming (LP) relaxation, without performing branching or adding cutting planes, follow these instructions:
-
 1. **Solve Root LP Only**
 
 In ``src/main/src/call_pricing.cpp``, locate the function:
