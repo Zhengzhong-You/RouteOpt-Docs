@@ -80,7 +80,7 @@ Example of Usage
         return 0;
     }
 
-5. Further Reading
+Further Reading
 ------------------
 
 For more detailed information, please refer to:
