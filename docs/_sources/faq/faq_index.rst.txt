@@ -8,3 +8,4 @@ This section contains answers to common questions and practical tips for effecti
 
    general_question
    usage_tips
+   troubleshooting
