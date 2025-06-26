@@ -347,7 +347,7 @@
       
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="faq.html"><span title="/faq/faq.rst (reference label)" class="md-ellipsis">FAQ</span></a>
+          <a href="faq_index.html"><span title="/faq/faq_index.rst (reference label)" class="md-ellipsis">FAQ</span></a>
           
             <label for="__nav_8">
               <span class="md-nav__icon md-icon"></span>
@@ -358,7 +358,7 @@
       <nav class="md-nav" aria-label="FAQ" data-md-level="1">
         <label class="md-nav__title" for="__nav_8">
           <span class="md-nav__icon md-icon"></span>
-          <span title="/faq/faq.rst (reference label)" class="md-ellipsis">FAQ</span>
+          <span title="/faq/faq_index.rst (reference label)" class="md-ellipsis">FAQ</span>
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -395,6 +395,21 @@
         <span title="/faq/usage_tips.rst (reference label)" class="md-ellipsis">Usage Tips</span>
       </a>
       
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="troubleshooting.html" class="md-nav__link">
+        <span title="/faq/troubleshooting.rst (reference label)" class="md-ellipsis">Troubleshooting</span>
+      </a>
     </li>
   
 
@@ -441,7 +456,7 @@
 <ol class="arabic simple">
 <li><p><strong>Solve Root LP Only</strong></p></li>
 </ol>
-<p>In <code class="docutils literal notranslate"><span class="pre">src/main/src/call_pricing.cpp</span></code>, locate the function:</p>
+<p>In <code class="docutils literal notranslate"><span class="pre">src/main/src/call_pricing.cpp</span></code>, find the function:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">CVRPSolver::callPricingAtBeg</span><span class="p">(</span><span class="n">BbNode</span><span class="w"> </span><span class="o">*</span><span class="n">node</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// Original function code here</span>
 
@@ -462,6 +477,17 @@
 <span class="p">}</span>
 </code></pre></div>
 </div>
+<ol class="arabic simple" start="3">
+<li><p><strong>Update Parameters via Templates</strong></p></li>
+</ol>
+<p>To conveniently update key parameters, use the provided Python script:</p>
+<p>In <cite>RouteOpt/packages/application/cvrp/</cite>, prepare a template file <cite>xxx.txt</cite> (examples in the <cite>templates</cite> folder), and then run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>python3<span class="w"> </span>inspect_code.py<span class="w"> </span>xxx.txt
+</code></pre></div>
+</div>
+<p>This automatically modifies key parameters initialized with braces <cite>{}</cite> in your source code.</p>
+<p><strong>Note:</strong>
+Only parameters initialized using <cite>{}</cite> can be modified by this script. Parameters initialized using <cite>=</cite> cannot be changed automatically.</p>
 
 
 
@@ -502,6 +528,21 @@
           </div>
         </a>
       
+      
+        
+        <a href="troubleshooting.html" class="md-footer__link md-footer__link--next" aria-label="Next: Troubleshooting" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Troubleshooting
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
       
     </nav>
   
