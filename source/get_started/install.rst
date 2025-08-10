@@ -8,13 +8,21 @@ Prerequisites
 Before proceeding, ensure you have the following installed:
 
 - A C/C++ compiler.
+- **CMake (>= 3.18)**. XGBoost requires at least CMake 3.18. Check with:
+
+  .. code-block:: bash
+
+      cmake --version
+
+  If your version is lower, please upgrade CMake before building.
+
 - **Ninja** build system. Install it using:
 
   .. code-block:: bash
 
       sudo apt-get install ninja-build
 
-  Ninja is used (for example, with Xgboost).
+  Ninja is used (for example, with XGBoost).
 
 - **Gurobi**: Make sure Gurobi is installed and note its installation path. This path will be used in the following steps.
   **Important**: Enter the full path to the Linux64 folder (e.g., ``/home/yzz/gurobi1000/linux64``), not just the parent directory.
