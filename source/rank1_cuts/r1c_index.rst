@@ -28,7 +28,7 @@ Rank-1 cuts have the following form:
 
 .. math::
 
-   \sum_{r\in \Omega} \left\lfloor \sum_{i\in C} p_i a_i^r \right\rfloor \leq \left\lfloor \sum_{i \in C} p_i \right\rfloor
+   \sum_{r\in \Omega} \left\lfloor \sum_{i\in C} p_i a_i^r \right\rfloor x_r \leq \left\lfloor \sum_{i \in C} p_i \right\rfloor
 
 where:
 
