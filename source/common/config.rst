@@ -76,7 +76,7 @@ Utility Functions and Classes
 
   - **equalFloat**: A constexpr function for comparing two double values within a specified tolerance.
   - **checkFrac**: Determines whether a number has a fractional component.
-  - **mkDir**: Creates a directory if it does not already exist using **C++17** filesystem operations (So you need to use C++17 to compile the code).
+  - **mkDir**: Creates a directory if it does not already exist using **C++20** filesystem operations (So you need to use C++20 to compile the code).
   - **TimeSetter**: A templated utility class to measure the execution time of functions.
   - **printTimeMessage** and **printHeadLines**: Functions to print formatted messages to the console.
   - **GlobTimer**: A timer class that tracks elapsed time; a global instance ``glob_timer`` is provided.

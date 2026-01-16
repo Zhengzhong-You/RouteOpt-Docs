@@ -1,13 +1,15 @@
 Install
 =======
 
-This guide is for building RouteOpt on Linux only.
+This guide covers building RouteOpt on Linux and macOS.
 
 Prerequisites
 -------------
 Before proceeding, ensure you have the following installed:
 
 - A C/C++ compiler.
+  - Linux: install build tools (e.g., ``sudo apt-get install build-essential``).
+  - macOS: install Xcode Command Line Tools (``xcode-select --install``).
 - **CMake (>= 3.18)**. XGBoost requires at least CMake 3.18. Check with:
 
   .. code-block:: bash
@@ -16,16 +18,29 @@ Before proceeding, ensure you have the following installed:
 
   If your version is lower, please upgrade CMake before building.
 
+  macOS (Homebrew):
+
+  .. code-block:: bash
+
+      brew install cmake
+
 - **Ninja** build system. Install it using:
 
   .. code-block:: bash
 
       sudo apt-get install ninja-build
 
+  macOS (Homebrew):
+
+  .. code-block:: bash
+
+      brew install ninja
+
   Ninja is used (for example, with XGBoost).
 
 - **Gurobi**: Make sure Gurobi is installed and note its installation path. This path will be used in the following steps.
-  **Important**: Enter the full path to the Linux64 folder (e.g., ``/home/yzz/gurobi1000/linux64``), not just the parent directory.
+  **Important**: Enter the full path to the platform folder (e.g., ``/home/yzz/gurobi1000/linux64`` on Linux or
+  ``/Library/gurobi1201/macos_universal2`` on macOS), not just the parent directory.
 
 Installation Steps
 ------------------
@@ -54,6 +69,10 @@ Installation Steps
    When prompted, enter the full path to your Gurobi installation, for example:
 
       /home/yzz/gurobi1000/linux64
+
+   macOS example:
+
+      /Library/gurobi1201/macos_universal2
 
 5. **Build RouteOpt**
    The build process may take about 3 minutes to complete. Once finished, you should see the message:
@@ -150,7 +169,7 @@ Below is a complete example of a ``CMakeLists.txt`` file configuring a CVRP appl
     cmake_minimum_required(VERSION 3.10)
     project(cvrp VERSION 3.0)
 
-    set(CMAKE_CXX_STANDARD 17)
+    set(CMAKE_CXX_STANDARD 20)
     set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
     if (NOT CMAKE_BUILD_TYPE)

@@ -584,25 +584,36 @@
 
 
 <h1 id="install">Install<a class="headerlink" href="#install" title="Link to this heading">¶</a></h1>
-<p>This guide is for building RouteOpt on Linux only.</p>
+<p>This guide covers building RouteOpt on Linux and macOS.</p>
 <h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">¶</a></h2>
 <p>Before proceeding, ensure you have the following installed:</p>
 <ul>
-<li><p>A C/C++ compiler.</p></li>
+<li><p>A C/C++ compiler.
+- Linux: install build tools (e.g., <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">build-essential</span></code>).
+- macOS: install Xcode Command Line Tools (<code class="docutils literal notranslate"><span class="pre">xcode-select</span> <span class="pre">--install</span></code>).</p></li>
 <li><p><strong>CMake (&gt;= 3.18)</strong>. XGBoost requires at least CMake 3.18. Check with:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>cmake<span class="w"> </span>--version
 </code></pre></div>
 </div>
 <p>If your version is lower, please upgrade CMake before building.</p>
+<p>macOS (Homebrew):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>brew<span class="w"> </span>install<span class="w"> </span>cmake
+</code></pre></div>
+</div>
 </li>
 <li><p><strong>Ninja</strong> build system. Install it using:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>ninja-build
 </code></pre></div>
 </div>
+<p>macOS (Homebrew):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>brew<span class="w"> </span>install<span class="w"> </span>ninja
+</code></pre></div>
+</div>
 <p>Ninja is used (for example, with XGBoost).</p>
 </li>
 <li><p><strong>Gurobi</strong>: Make sure Gurobi is installed and note its installation path. This path will be used in the following steps.
-<strong>Important</strong>: Enter the full path to the Linux64 folder (e.g., <code class="docutils literal notranslate"><span class="pre">/home/yzz/gurobi1000/linux64</span></code>), not just the parent directory.</p></li>
+<strong>Important</strong>: Enter the full path to the platform folder (e.g., <code class="docutils literal notranslate"><span class="pre">/home/yzz/gurobi1000/linux64</span></code> on Linux or
+<code class="docutils literal notranslate"><span class="pre">/Library/gurobi1201/macos_universal2</span></code> on macOS), not just the parent directory.</p></li>
 </ul>
 <h2 id="installation-steps">Installation Steps<a class="headerlink" href="#installation-steps" title="Link to this heading">¶</a></h2>
 <ol class="arabic">
@@ -628,6 +639,10 @@ Run the build script:</p>
 When prompted, enter the full path to your Gurobi installation, for example:</p>
 <blockquote>
 <div><p>/home/yzz/gurobi1000/linux64</p>
+</div></blockquote>
+<p>macOS example:</p>
+<blockquote>
+<div><p>/Library/gurobi1201/macos_universal2</p>
 </div></blockquote>
 </li>
 <li><p><strong>Build RouteOpt</strong>
@@ -710,7 +725,7 @@ The build process may take about 3 minutes to complete. Once finished, you shoul
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><code><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.10</span><span class="p">)</span>
 <span class="nb">project</span><span class="p">(</span><span class="s">cvrp</span><span class="w"> </span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.0</span><span class="p">)</span>
 
-<span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD</span><span class="w"> </span><span class="s">17</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD</span><span class="w"> </span><span class="s">20</span><span class="p">)</span>
 <span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD_REQUIRED</span><span class="w"> </span><span class="s">ON</span><span class="p">)</span>
 
 <span class="nb">if</span><span class="w"> </span><span class="p">(</span><span class="s">NOT</span><span class="w"> </span><span class="s">CMAKE_BUILD_TYPE</span><span class="p">)</span>
