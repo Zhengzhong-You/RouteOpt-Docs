@@ -1,7 +1,7 @@
 Install
 =======
 
-This guide covers building RouteOpt on Linux and macOS.
+This guide covers building RouteOpt on Linux, macOS, and Windows.
 
 Prerequisites
 -------------
@@ -10,6 +10,7 @@ Before proceeding, ensure you have the following installed:
 - A C/C++ compiler.
   - Linux: install build tools (e.g., ``sudo apt-get install build-essential``).
   - macOS: install Xcode Command Line Tools (``xcode-select --install``).
+  - Windows: install **Visual Studio 2022** or **Build Tools for Visual Studio** (C++ workload).
 - **CMake (>= 3.18)**. XGBoost requires at least CMake 3.18. Check with:
 
   .. code-block:: bash
@@ -24,6 +25,12 @@ Before proceeding, ensure you have the following installed:
 
       brew install cmake
 
+  Windows (PowerShell, if not already installed):
+
+  .. code-block:: powershell
+
+      winget install Kitware.CMake
+
 - **Ninja** build system. Install it using:
 
   .. code-block:: bash
@@ -36,11 +43,17 @@ Before proceeding, ensure you have the following installed:
 
       brew install ninja
 
+  Windows (PowerShell):
+
+  .. code-block:: powershell
+
+      winget install Ninja-build.Ninja
+
   Ninja is used (for example, with XGBoost).
 
 - **Gurobi**: Make sure Gurobi is installed and note its installation path. This path will be used in the following steps.
-  **Important**: Enter the full path to the platform folder (e.g., ``/home/yzz/gurobi1000/linux64`` on Linux or
-  ``/Library/gurobi1201/macos_universal2`` on macOS), not just the parent directory.
+  **Important**: Enter the full path to the platform folder (e.g., ``/home/yzz/gurobi1000/linux64`` on Linux,
+  ``/Library/gurobi1201/macos_universal2`` on macOS, or ``C:\\gurobi1300\\win64`` on Windows), not just the parent directory.
 
 Installation Steps
 ------------------
@@ -91,11 +104,18 @@ If you want to use our CVRP or TW solver:
 
       cd packages/application/cvrp
 
-2. Run the build script:
+2. Run the build script (Linux/macOS):
 
    .. code-block:: bash
 
       sh build.sh
+
+   Windows (PowerShell):
+
+   .. code-block:: powershell
+
+      cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+      cmake --build build --config Release
 
 3. The script will compile the CVRP or TW solver and run a small test instance (P-n20-k2.vrp). If the test succeeds, you are all set!
 
