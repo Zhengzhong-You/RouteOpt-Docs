@@ -282,7 +282,9 @@ Below is an example demonstrating how to use the Rank1RCController in RouteOpt. 
    For a deeper understanding of the Rank-1 RC Controller, explore the application source code under
    ``packages/application/cvrp/src`` using an IDE such as CLion.
 
-   If you have any questions, please feel free to contact me at `you.z@ufl.edu <mailto:you.z@ufl.edu>`_ or reach out via Group Chat.
+   If you have any issues or questions, please open an issue in the RouteOpt GitHub repository; I typically respond within one day, though replies may take longer during busy periods.
+   I am actively seeking a PhD position in operations research, operations management, or financial engineering.
+   If you would like to collaborate on related questions, please do not hesitate to reach out at `ricky.you.or@gmail.com <mailto:ricky.you.or@gmail.com>`_.
 
 Conclusion
 ----------

@@ -512,7 +512,9 @@ create a solver instance, define a cost matrix, and then use the Rank1Separation
 
    Reviewing the source code of the CVRP application related to the Rank-1 separation module will provide valuable insights into how to use these features effectively.
 
-   If you have any questions, please feel free to contact me at `you.z@ufl.edu <mailto:you.z@ufl.edu>`_ or send your question in Group Chat.
+   If you have any issues or questions, please open an issue in the RouteOpt GitHub repository; I typically respond within one day, though replies may take longer during busy periods.
+   I am actively seeking a PhD position in operations research, operations management, or financial engineering.
+   If you would like to collaborate on related questions, please do not hesitate to reach out at `ricky.you.or@gmail.com <mailto:ricky.you.or@gmail.com>`_.
 
 Conclusion
 ----------
