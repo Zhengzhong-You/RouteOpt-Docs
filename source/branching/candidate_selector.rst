@@ -392,5 +392,8 @@ different branching scenarios.
 Further Reading
 ---------------
 For more details on the candidate selection process and its integration into the RouteOpt branching framework,
-please refer to the source code in the application of CVRP located in ``packages/application/cvrp/src/``, or simply
-ask your question in the RouteOpt Slack/Wechat channel, and I may update the documentation accordingly.
+please refer to the source code in the application of CVRP located in ``packages/application/cvrp/src/``, or please
+open an issue in the RouteOpt GitHub repository; I typically respond within one day, though replies may take longer
+during busy periods. I am actively seeking a PhD position in operations research, operations management, or
+financial engineering. If you would like to collaborate on related questions, please do not hesitate to reach out
+at `ricky.you.or@gmail.com <mailto:ricky.you.or@gmail.com>`_.
